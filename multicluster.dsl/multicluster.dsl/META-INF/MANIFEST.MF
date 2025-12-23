@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: multicluster.dsl
+Bundle-ManifestVersion: 2
+Bundle-Name: multicluster.dsl
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: multicluster.dsl; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle:  org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.emf.mwe2.launch,
+ org.eclipse.emf.mwe2.runtime,
+ org.apache.commons.logging,
+ org.eclipse.equinox.common;bundle-version="3.16.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-17

@@ -1,0 +1,9 @@
+grammar multicluster.dsl.MultiClusterDsl with org.eclipse.xtext.common.Terminals
+
+generate multiClusterDsl "http://www.dsl.multicluster/MultiClusterDsl"
+
+Model:
+	greetings+=Greeting*;
+	
+Greeting:
+	'Hello' name=ID '!';
