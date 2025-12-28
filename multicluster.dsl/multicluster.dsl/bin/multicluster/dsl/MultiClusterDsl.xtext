@@ -2,8 +2,46 @@ grammar multicluster.dsl.MultiClusterDsl with org.eclipse.xtext.common.Terminals
 
 generate multiClusterDsl "http://www.dsl.multicluster/MultiClusterDsl"
 
+/* Root model */
 Model:
-	greetings+=Greeting*;
-	
-Greeting:
-	'Hello' name=ID '!';
+    application=Application
+;
+ 
+/* Application */
+Application:
+    'application' name=ID '{'
+        clusters+=Cluster*
+    '}'
+;
+ 
+/* Cluster */
+Cluster:
+    'cluster' name=ID '{'
+        deployment=Deployment
+        ingress=Ingress?
+    '}'
+;
+ 
+/* Deployment */
+Deployment:
+    'deployment' '{'
+        'image' image=STRING
+        'replicas' replicas=INT
+        resources=Resources
+    '}'
+;
+ 
+/* Resources */
+Resources:
+    'resources' '{'
+        'cpu' cpu=STRING
+        'memory' memory=STRING
+    '}'
+;
+ 
+/* Ingress */
+Ingress:
+    'ingress' '{'
+        'path' path=STRING
+    '}'
+;
