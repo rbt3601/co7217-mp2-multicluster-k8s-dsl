@@ -6,10 +6,26 @@ Bundle-Vendor: My Company
 Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: multicluster.dsl; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle:  org.eclipse.xtext,
+Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.xbase,
  org.eclipse.emf.mwe2.launch,
  org.eclipse.emf.mwe2.runtime,
  org.apache.commons.logging,
- org.eclipse.equinox.common;bundle-version="3.16.0"
+ org.eclipse.equinox.common;bundle-version="3.16.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.36.0",
+ org.eclipse.emf.common,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Bundle-RequiredExecutionEnvironment: JavaSE-17
+Export-Package: multicluster.dsl.generator,
+ multicluster.dsl.multiClusterDsl.util,
+ multicluster.dsl,
+ multicluster.dsl.parser.antlr,
+ multicluster.dsl.validation,
+ multicluster.dsl.multiClusterDsl,
+ multicluster.dsl.parser.antlr.internal,
+ multicluster.dsl.serializer,
+ multicluster.dsl.multiClusterDsl.impl,
+ multicluster.dsl.scoping,
+ multicluster.dsl.services
+Import-Package: org.apache.log4j
