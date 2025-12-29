@@ -4,16 +4,23 @@
 package multicluster.dsl.multiClusterDsl.impl;
 
 import multicluster.dsl.multiClusterDsl.Application;
+import multicluster.dsl.multiClusterDsl.AutoScaling;
 import multicluster.dsl.multiClusterDsl.Cluster;
+import multicluster.dsl.multiClusterDsl.ConfigEntry;
+import multicluster.dsl.multiClusterDsl.ConfigMap;
 import multicluster.dsl.multiClusterDsl.Deployment;
+import multicluster.dsl.multiClusterDsl.Health;
 import multicluster.dsl.multiClusterDsl.Ingress;
 import multicluster.dsl.multiClusterDsl.Model;
 import multicluster.dsl.multiClusterDsl.MultiClusterDslFactory;
 import multicluster.dsl.multiClusterDsl.MultiClusterDslPackage;
 import multicluster.dsl.multiClusterDsl.Resources;
+import multicluster.dsl.multiClusterDsl.Service;
+import multicluster.dsl.multiClusterDsl.ServiceType;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -67,7 +74,49 @@ public class MultiClusterDslPackageImpl extends EPackageImpl implements MultiClu
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass healthEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass serviceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass ingressEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass configMapEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass configEntryEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass autoScalingEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum serviceTypeEEnum = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -181,9 +230,20 @@ public class MultiClusterDslPackageImpl extends EPackageImpl implements MultiClu
    * @generated
    */
   @Override
+  public EAttribute getApplication_Namespace()
+  {
+    return (EAttribute)applicationEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EReference getApplication_Clusters()
   {
-    return (EReference)applicationEClass.getEStructuralFeatures().get(1);
+    return (EReference)applicationEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -225,9 +285,42 @@ public class MultiClusterDslPackageImpl extends EPackageImpl implements MultiClu
    * @generated
    */
   @Override
-  public EReference getCluster_Ingress()
+  public EReference getCluster_Service()
   {
     return (EReference)clusterEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getCluster_Ingress()
+  {
+    return (EReference)clusterEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getCluster_ConfigMap()
+  {
+    return (EReference)clusterEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getCluster_Autoscaling()
+  {
+    return (EReference)clusterEClass.getEStructuralFeatures().get(5);
   }
 
   /**
@@ -280,6 +373,17 @@ public class MultiClusterDslPackageImpl extends EPackageImpl implements MultiClu
    * @generated
    */
   @Override
+  public EReference getDeployment_Health()
+  {
+    return (EReference)deploymentEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getResources()
   {
     return resourcesEClass;
@@ -313,6 +417,83 @@ public class MultiClusterDslPackageImpl extends EPackageImpl implements MultiClu
    * @generated
    */
   @Override
+  public EClass getHealth()
+  {
+    return healthEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getHealth_ReadinessPath()
+  {
+    return (EAttribute)healthEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getHealth_LivenessPath()
+  {
+    return (EAttribute)healthEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getService()
+  {
+    return serviceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getService_Type()
+  {
+    return (EAttribute)serviceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getService_Port()
+  {
+    return (EAttribute)serviceEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getService_TargetPort()
+  {
+    return (EAttribute)serviceEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getIngress()
   {
     return ingressEClass;
@@ -327,6 +508,127 @@ public class MultiClusterDslPackageImpl extends EPackageImpl implements MultiClu
   public EAttribute getIngress_Path()
   {
     return (EAttribute)ingressEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getConfigMap()
+  {
+    return configMapEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getConfigMap_Name()
+  {
+    return (EAttribute)configMapEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getConfigMap_Entries()
+  {
+    return (EReference)configMapEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getConfigEntry()
+  {
+    return configEntryEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getConfigEntry_Key()
+  {
+    return (EAttribute)configEntryEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getConfigEntry_Value()
+  {
+    return (EAttribute)configEntryEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getAutoScaling()
+  {
+    return autoScalingEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getAutoScaling_MinReplicas()
+  {
+    return (EAttribute)autoScalingEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getAutoScaling_MaxReplicas()
+  {
+    return (EAttribute)autoScalingEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getAutoScaling_CpuUtilization()
+  {
+    return (EAttribute)autoScalingEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EEnum getServiceType()
+  {
+    return serviceTypeEEnum;
   }
 
   /**
@@ -365,24 +667,54 @@ public class MultiClusterDslPackageImpl extends EPackageImpl implements MultiClu
 
     applicationEClass = createEClass(APPLICATION);
     createEAttribute(applicationEClass, APPLICATION__NAME);
+    createEAttribute(applicationEClass, APPLICATION__NAMESPACE);
     createEReference(applicationEClass, APPLICATION__CLUSTERS);
 
     clusterEClass = createEClass(CLUSTER);
     createEAttribute(clusterEClass, CLUSTER__NAME);
     createEReference(clusterEClass, CLUSTER__DEPLOYMENT);
+    createEReference(clusterEClass, CLUSTER__SERVICE);
     createEReference(clusterEClass, CLUSTER__INGRESS);
+    createEReference(clusterEClass, CLUSTER__CONFIG_MAP);
+    createEReference(clusterEClass, CLUSTER__AUTOSCALING);
 
     deploymentEClass = createEClass(DEPLOYMENT);
     createEAttribute(deploymentEClass, DEPLOYMENT__IMAGE);
     createEAttribute(deploymentEClass, DEPLOYMENT__REPLICAS);
     createEReference(deploymentEClass, DEPLOYMENT__RESOURCES);
+    createEReference(deploymentEClass, DEPLOYMENT__HEALTH);
 
     resourcesEClass = createEClass(RESOURCES);
     createEAttribute(resourcesEClass, RESOURCES__CPU);
     createEAttribute(resourcesEClass, RESOURCES__MEMORY);
 
+    healthEClass = createEClass(HEALTH);
+    createEAttribute(healthEClass, HEALTH__READINESS_PATH);
+    createEAttribute(healthEClass, HEALTH__LIVENESS_PATH);
+
+    serviceEClass = createEClass(SERVICE);
+    createEAttribute(serviceEClass, SERVICE__TYPE);
+    createEAttribute(serviceEClass, SERVICE__PORT);
+    createEAttribute(serviceEClass, SERVICE__TARGET_PORT);
+
     ingressEClass = createEClass(INGRESS);
     createEAttribute(ingressEClass, INGRESS__PATH);
+
+    configMapEClass = createEClass(CONFIG_MAP);
+    createEAttribute(configMapEClass, CONFIG_MAP__NAME);
+    createEReference(configMapEClass, CONFIG_MAP__ENTRIES);
+
+    configEntryEClass = createEClass(CONFIG_ENTRY);
+    createEAttribute(configEntryEClass, CONFIG_ENTRY__KEY);
+    createEAttribute(configEntryEClass, CONFIG_ENTRY__VALUE);
+
+    autoScalingEClass = createEClass(AUTO_SCALING);
+    createEAttribute(autoScalingEClass, AUTO_SCALING__MIN_REPLICAS);
+    createEAttribute(autoScalingEClass, AUTO_SCALING__MAX_REPLICAS);
+    createEAttribute(autoScalingEClass, AUTO_SCALING__CPU_UTILIZATION);
+
+    // Create enums
+    serviceTypeEEnum = createEEnum(SERVICE_TYPE);
   }
 
   /**
@@ -421,24 +753,57 @@ public class MultiClusterDslPackageImpl extends EPackageImpl implements MultiClu
 
     initEClass(applicationEClass, Application.class, "Application", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getApplication_Name(), ecorePackage.getEString(), "name", null, 0, 1, Application.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getApplication_Namespace(), ecorePackage.getEString(), "namespace", null, 0, 1, Application.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getApplication_Clusters(), this.getCluster(), null, "clusters", null, 0, -1, Application.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(clusterEClass, Cluster.class, "Cluster", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getCluster_Name(), ecorePackage.getEString(), "name", null, 0, 1, Cluster.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getCluster_Deployment(), this.getDeployment(), null, "deployment", null, 0, 1, Cluster.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getCluster_Service(), this.getService(), null, "service", null, 0, 1, Cluster.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getCluster_Ingress(), this.getIngress(), null, "ingress", null, 0, 1, Cluster.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getCluster_ConfigMap(), this.getConfigMap(), null, "configMap", null, 0, 1, Cluster.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getCluster_Autoscaling(), this.getAutoScaling(), null, "autoscaling", null, 0, 1, Cluster.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(deploymentEClass, Deployment.class, "Deployment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getDeployment_Image(), ecorePackage.getEString(), "image", null, 0, 1, Deployment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getDeployment_Replicas(), ecorePackage.getEInt(), "replicas", null, 0, 1, Deployment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getDeployment_Resources(), this.getResources(), null, "resources", null, 0, 1, Deployment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getDeployment_Health(), this.getHealth(), null, "health", null, 0, 1, Deployment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(resourcesEClass, Resources.class, "Resources", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getResources_Cpu(), ecorePackage.getEString(), "cpu", null, 0, 1, Resources.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getResources_Memory(), ecorePackage.getEString(), "memory", null, 0, 1, Resources.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(healthEClass, Health.class, "Health", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getHealth_ReadinessPath(), ecorePackage.getEString(), "readinessPath", null, 0, 1, Health.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getHealth_LivenessPath(), ecorePackage.getEString(), "livenessPath", null, 0, 1, Health.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(serviceEClass, Service.class, "Service", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getService_Type(), this.getServiceType(), "type", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getService_Port(), ecorePackage.getEInt(), "port", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getService_TargetPort(), ecorePackage.getEInt(), "targetPort", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(ingressEClass, Ingress.class, "Ingress", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getIngress_Path(), ecorePackage.getEString(), "path", null, 0, 1, Ingress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(configMapEClass, ConfigMap.class, "ConfigMap", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getConfigMap_Name(), ecorePackage.getEString(), "name", null, 0, 1, ConfigMap.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getConfigMap_Entries(), this.getConfigEntry(), null, "entries", null, 0, -1, ConfigMap.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(configEntryEClass, ConfigEntry.class, "ConfigEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getConfigEntry_Key(), ecorePackage.getEString(), "key", null, 0, 1, ConfigEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getConfigEntry_Value(), ecorePackage.getEString(), "value", null, 0, 1, ConfigEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(autoScalingEClass, AutoScaling.class, "AutoScaling", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getAutoScaling_MinReplicas(), ecorePackage.getEInt(), "minReplicas", null, 0, 1, AutoScaling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAutoScaling_MaxReplicas(), ecorePackage.getEInt(), "maxReplicas", null, 0, 1, AutoScaling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAutoScaling_CpuUtilization(), ecorePackage.getEInt(), "cpuUtilization", null, 0, 1, AutoScaling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    // Initialize enums and add enum literals
+    initEEnum(serviceTypeEEnum, ServiceType.class, "ServiceType");
+    addEEnumLiteral(serviceTypeEEnum, ServiceType.CLUSTER_IP);
+    addEEnumLiteral(serviceTypeEEnum, ServiceType.NODE_PORT);
+    addEEnumLiteral(serviceTypeEEnum, ServiceType.LOAD_BALANCER);
 
     // Create resource
     createResource(eNS_URI);

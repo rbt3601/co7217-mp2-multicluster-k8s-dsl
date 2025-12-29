@@ -6,6 +6,7 @@ package multicluster.dsl.multiClusterDsl.impl;
 import multicluster.dsl.multiClusterDsl.*;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -70,9 +71,48 @@ public class MultiClusterDslFactoryImpl extends EFactoryImpl implements MultiClu
       case MultiClusterDslPackage.CLUSTER: return createCluster();
       case MultiClusterDslPackage.DEPLOYMENT: return createDeployment();
       case MultiClusterDslPackage.RESOURCES: return createResources();
+      case MultiClusterDslPackage.HEALTH: return createHealth();
+      case MultiClusterDslPackage.SERVICE: return createService();
       case MultiClusterDslPackage.INGRESS: return createIngress();
+      case MultiClusterDslPackage.CONFIG_MAP: return createConfigMap();
+      case MultiClusterDslPackage.CONFIG_ENTRY: return createConfigEntry();
+      case MultiClusterDslPackage.AUTO_SCALING: return createAutoScaling();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+    }
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Object createFromString(EDataType eDataType, String initialValue)
+  {
+    switch (eDataType.getClassifierID())
+    {
+      case MultiClusterDslPackage.SERVICE_TYPE:
+        return createServiceTypeFromString(eDataType, initialValue);
+      default:
+        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+    }
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String convertToString(EDataType eDataType, Object instanceValue)
+  {
+    switch (eDataType.getClassifierID())
+    {
+      case MultiClusterDslPackage.SERVICE_TYPE:
+        return convertServiceTypeToString(eDataType, instanceValue);
+      default:
+        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
   }
 
@@ -142,10 +182,92 @@ public class MultiClusterDslFactoryImpl extends EFactoryImpl implements MultiClu
    * @generated
    */
   @Override
+  public Health createHealth()
+  {
+    HealthImpl health = new HealthImpl();
+    return health;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Service createService()
+  {
+    ServiceImpl service = new ServiceImpl();
+    return service;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Ingress createIngress()
   {
     IngressImpl ingress = new IngressImpl();
     return ingress;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ConfigMap createConfigMap()
+  {
+    ConfigMapImpl configMap = new ConfigMapImpl();
+    return configMap;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ConfigEntry createConfigEntry()
+  {
+    ConfigEntryImpl configEntry = new ConfigEntryImpl();
+    return configEntry;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public AutoScaling createAutoScaling()
+  {
+    AutoScalingImpl autoScaling = new AutoScalingImpl();
+    return autoScaling;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ServiceType createServiceTypeFromString(EDataType eDataType, String initialValue)
+  {
+    ServiceType result = ServiceType.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertServiceTypeToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
   }
 
   /**

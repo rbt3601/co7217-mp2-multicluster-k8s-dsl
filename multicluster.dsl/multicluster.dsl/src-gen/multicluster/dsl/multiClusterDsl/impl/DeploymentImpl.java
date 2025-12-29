@@ -4,6 +4,7 @@
 package multicluster.dsl.multiClusterDsl.impl;
 
 import multicluster.dsl.multiClusterDsl.Deployment;
+import multicluster.dsl.multiClusterDsl.Health;
 import multicluster.dsl.multiClusterDsl.MultiClusterDslPackage;
 import multicluster.dsl.multiClusterDsl.Resources;
 
@@ -27,6 +28,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *   <li>{@link multicluster.dsl.multiClusterDsl.impl.DeploymentImpl#getImage <em>Image</em>}</li>
  *   <li>{@link multicluster.dsl.multiClusterDsl.impl.DeploymentImpl#getReplicas <em>Replicas</em>}</li>
  *   <li>{@link multicluster.dsl.multiClusterDsl.impl.DeploymentImpl#getResources <em>Resources</em>}</li>
+ *   <li>{@link multicluster.dsl.multiClusterDsl.impl.DeploymentImpl#getHealth <em>Health</em>}</li>
  * </ul>
  *
  * @generated
@@ -82,6 +84,16 @@ public class DeploymentImpl extends MinimalEObjectImpl.Container implements Depl
    * @ordered
    */
   protected Resources resources;
+
+  /**
+   * The cached value of the '{@link #getHealth() <em>Health</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getHealth()
+   * @generated
+   * @ordered
+   */
+  protected Health health;
 
   /**
    * <!-- begin-user-doc -->
@@ -210,12 +222,64 @@ public class DeploymentImpl extends MinimalEObjectImpl.Container implements Depl
    * @generated
    */
   @Override
+  public Health getHealth()
+  {
+    return health;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetHealth(Health newHealth, NotificationChain msgs)
+  {
+    Health oldHealth = health;
+    health = newHealth;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MultiClusterDslPackage.DEPLOYMENT__HEALTH, oldHealth, newHealth);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setHealth(Health newHealth)
+  {
+    if (newHealth != health)
+    {
+      NotificationChain msgs = null;
+      if (health != null)
+        msgs = ((InternalEObject)health).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MultiClusterDslPackage.DEPLOYMENT__HEALTH, null, msgs);
+      if (newHealth != null)
+        msgs = ((InternalEObject)newHealth).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MultiClusterDslPackage.DEPLOYMENT__HEALTH, null, msgs);
+      msgs = basicSetHealth(newHealth, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MultiClusterDslPackage.DEPLOYMENT__HEALTH, newHealth, newHealth));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
     {
       case MultiClusterDslPackage.DEPLOYMENT__RESOURCES:
         return basicSetResources(null, msgs);
+      case MultiClusterDslPackage.DEPLOYMENT__HEALTH:
+        return basicSetHealth(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -236,6 +300,8 @@ public class DeploymentImpl extends MinimalEObjectImpl.Container implements Depl
         return getReplicas();
       case MultiClusterDslPackage.DEPLOYMENT__RESOURCES:
         return getResources();
+      case MultiClusterDslPackage.DEPLOYMENT__HEALTH:
+        return getHealth();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -258,6 +324,9 @@ public class DeploymentImpl extends MinimalEObjectImpl.Container implements Depl
         return;
       case MultiClusterDslPackage.DEPLOYMENT__RESOURCES:
         setResources((Resources)newValue);
+        return;
+      case MultiClusterDslPackage.DEPLOYMENT__HEALTH:
+        setHealth((Health)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -282,6 +351,9 @@ public class DeploymentImpl extends MinimalEObjectImpl.Container implements Depl
       case MultiClusterDslPackage.DEPLOYMENT__RESOURCES:
         setResources((Resources)null);
         return;
+      case MultiClusterDslPackage.DEPLOYMENT__HEALTH:
+        setHealth((Health)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -302,6 +374,8 @@ public class DeploymentImpl extends MinimalEObjectImpl.Container implements Depl
         return replicas != REPLICAS_EDEFAULT;
       case MultiClusterDslPackage.DEPLOYMENT__RESOURCES:
         return resources != null;
+      case MultiClusterDslPackage.DEPLOYMENT__HEALTH:
+        return health != null;
     }
     return super.eIsSet(featureID);
   }

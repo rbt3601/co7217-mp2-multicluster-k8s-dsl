@@ -1,47 +1,106 @@
-grammar multicluster.dsl.MultiClusterDsl with org.eclipse.xtext.common.Terminals
+grammar multicluster.dsl.MultiClusterDsl
+    with org.eclipse.xtext.common.Terminals
 
 generate multiClusterDsl "http://www.dsl.multicluster/MultiClusterDsl"
 
-/* Root model */
+/*Root*/
+
 Model:
     application=Application
 ;
- 
-/* Application */
+
+/*Application*/
+
 Application:
     'application' name=ID '{'
+        ('namespace' namespace=STRING)?
         clusters+=Cluster*
     '}'
 ;
- 
-/* Cluster */
+
+/*Cluster*/
+
 Cluster:
     'cluster' name=ID '{'
         deployment=Deployment
+        service=Service?
         ingress=Ingress?
+        configMap=ConfigMap?
+        autoscaling=AutoScaling?
     '}'
 ;
- 
-/* Deployment */
+
+/*Deployment*/
+
 Deployment:
     'deployment' '{'
         'image' image=STRING
         'replicas' replicas=INT
         resources=Resources
+        health=Health?
     '}'
 ;
- 
-/* Resources */
+
+/*Resources*/
+
 Resources:
     'resources' '{'
         'cpu' cpu=STRING
         'memory' memory=STRING
     '}'
 ;
- 
-/* Ingress */
+
+/*Health Probes*/
+
+Health:
+    'health' '{'
+        'readinessPath' readinessPath=STRING
+        'livenessPath' livenessPath=STRING
+    '}'
+;
+
+/*Service*/
+
+Service:
+    'service' '{'
+        'type' type=ServiceType
+        'port' port=INT
+        'targetPort' targetPort=INT
+    '}'
+;
+
+/*Ingress*/
+
 Ingress:
     'ingress' '{'
         'path' path=STRING
     '}'
+;
+
+/*ConfigMap*/
+
+ConfigMap:
+    'configMap' name=ID '{'
+        entries+=ConfigEntry+
+    '}'
+;
+
+ConfigEntry:
+    key=ID value=STRING
+;
+
+/*Autoscaling*/
+
+AutoScaling:
+    'autoscaling' '{'
+        'minReplicas' minReplicas=INT
+        'maxReplicas' maxReplicas=INT
+        'cpuUtilization' cpuUtilization=INT
+    '}'
+;
+
+/*Enums*/
+
+enum ServiceType:
+    ClusterIP | NodePort | LoadBalancer
 ;

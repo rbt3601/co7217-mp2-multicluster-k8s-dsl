@@ -6,12 +6,17 @@ package multicluster.dsl.serializer;
 import com.google.inject.Inject;
 import java.util.Set;
 import multicluster.dsl.multiClusterDsl.Application;
+import multicluster.dsl.multiClusterDsl.AutoScaling;
 import multicluster.dsl.multiClusterDsl.Cluster;
+import multicluster.dsl.multiClusterDsl.ConfigEntry;
+import multicluster.dsl.multiClusterDsl.ConfigMap;
 import multicluster.dsl.multiClusterDsl.Deployment;
+import multicluster.dsl.multiClusterDsl.Health;
 import multicluster.dsl.multiClusterDsl.Ingress;
 import multicluster.dsl.multiClusterDsl.Model;
 import multicluster.dsl.multiClusterDsl.MultiClusterDslPackage;
 import multicluster.dsl.multiClusterDsl.Resources;
+import multicluster.dsl.multiClusterDsl.Service;
 import multicluster.dsl.services.MultiClusterDslGrammarAccess;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -40,11 +45,23 @@ public class MultiClusterDslSemanticSequencer extends AbstractDelegatingSemantic
 			case MultiClusterDslPackage.APPLICATION:
 				sequence_Application(context, (Application) semanticObject); 
 				return; 
+			case MultiClusterDslPackage.AUTO_SCALING:
+				sequence_AutoScaling(context, (AutoScaling) semanticObject); 
+				return; 
 			case MultiClusterDslPackage.CLUSTER:
 				sequence_Cluster(context, (Cluster) semanticObject); 
 				return; 
+			case MultiClusterDslPackage.CONFIG_ENTRY:
+				sequence_ConfigEntry(context, (ConfigEntry) semanticObject); 
+				return; 
+			case MultiClusterDslPackage.CONFIG_MAP:
+				sequence_ConfigMap(context, (ConfigMap) semanticObject); 
+				return; 
 			case MultiClusterDslPackage.DEPLOYMENT:
 				sequence_Deployment(context, (Deployment) semanticObject); 
+				return; 
+			case MultiClusterDslPackage.HEALTH:
+				sequence_Health(context, (Health) semanticObject); 
 				return; 
 			case MultiClusterDslPackage.INGRESS:
 				sequence_Ingress(context, (Ingress) semanticObject); 
@@ -54,6 +71,9 @@ public class MultiClusterDslSemanticSequencer extends AbstractDelegatingSemantic
 				return; 
 			case MultiClusterDslPackage.RESOURCES:
 				sequence_Resources(context, (Resources) semanticObject); 
+				return; 
+			case MultiClusterDslPackage.SERVICE:
+				sequence_Service(context, (Service) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -66,7 +86,7 @@ public class MultiClusterDslSemanticSequencer extends AbstractDelegatingSemantic
 	 *     Application returns Application
 	 *
 	 * Constraint:
-	 *     (name=ID clusters+=Cluster*)
+	 *     (name=ID namespace=STRING? clusters+=Cluster*)
 	 * </pre>
 	 */
 	protected void sequence_Application(ISerializationContext context, Application semanticObject) {
@@ -77,10 +97,43 @@ public class MultiClusterDslSemanticSequencer extends AbstractDelegatingSemantic
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     AutoScaling returns AutoScaling
+	 *
+	 * Constraint:
+	 *     (minReplicas=INT maxReplicas=INT cpuUtilization=INT)
+	 * </pre>
+	 */
+	protected void sequence_AutoScaling(ISerializationContext context, AutoScaling semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MultiClusterDslPackage.Literals.AUTO_SCALING__MIN_REPLICAS) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MultiClusterDslPackage.Literals.AUTO_SCALING__MIN_REPLICAS));
+			if (transientValues.isValueTransient(semanticObject, MultiClusterDslPackage.Literals.AUTO_SCALING__MAX_REPLICAS) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MultiClusterDslPackage.Literals.AUTO_SCALING__MAX_REPLICAS));
+			if (transientValues.isValueTransient(semanticObject, MultiClusterDslPackage.Literals.AUTO_SCALING__CPU_UTILIZATION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MultiClusterDslPackage.Literals.AUTO_SCALING__CPU_UTILIZATION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getAutoScalingAccess().getMinReplicasINTTerminalRuleCall_3_0(), semanticObject.getMinReplicas());
+		feeder.accept(grammarAccess.getAutoScalingAccess().getMaxReplicasINTTerminalRuleCall_5_0(), semanticObject.getMaxReplicas());
+		feeder.accept(grammarAccess.getAutoScalingAccess().getCpuUtilizationINTTerminalRuleCall_7_0(), semanticObject.getCpuUtilization());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
 	 *     Cluster returns Cluster
 	 *
 	 * Constraint:
-	 *     (name=ID deployment=Deployment ingress=Ingress?)
+	 *     (
+	 *         name=ID 
+	 *         deployment=Deployment 
+	 *         service=Service? 
+	 *         ingress=Ingress? 
+	 *         configMap=ConfigMap? 
+	 *         autoscaling=AutoScaling?
+	 *     )
 	 * </pre>
 	 */
 	protected void sequence_Cluster(ISerializationContext context, Cluster semanticObject) {
@@ -91,25 +144,73 @@ public class MultiClusterDslSemanticSequencer extends AbstractDelegatingSemantic
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     ConfigEntry returns ConfigEntry
+	 *
+	 * Constraint:
+	 *     (key=ID value=STRING)
+	 * </pre>
+	 */
+	protected void sequence_ConfigEntry(ISerializationContext context, ConfigEntry semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MultiClusterDslPackage.Literals.CONFIG_ENTRY__KEY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MultiClusterDslPackage.Literals.CONFIG_ENTRY__KEY));
+			if (transientValues.isValueTransient(semanticObject, MultiClusterDslPackage.Literals.CONFIG_ENTRY__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MultiClusterDslPackage.Literals.CONFIG_ENTRY__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getConfigEntryAccess().getKeyIDTerminalRuleCall_0_0(), semanticObject.getKey());
+		feeder.accept(grammarAccess.getConfigEntryAccess().getValueSTRINGTerminalRuleCall_1_0(), semanticObject.getValue());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     ConfigMap returns ConfigMap
+	 *
+	 * Constraint:
+	 *     (name=ID entries+=ConfigEntry+)
+	 * </pre>
+	 */
+	protected void sequence_ConfigMap(ISerializationContext context, ConfigMap semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
 	 *     Deployment returns Deployment
 	 *
 	 * Constraint:
-	 *     (image=STRING replicas=INT resources=Resources)
+	 *     (image=STRING replicas=INT resources=Resources health=Health?)
 	 * </pre>
 	 */
 	protected void sequence_Deployment(ISerializationContext context, Deployment semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Health returns Health
+	 *
+	 * Constraint:
+	 *     (readinessPath=STRING livenessPath=STRING)
+	 * </pre>
+	 */
+	protected void sequence_Health(ISerializationContext context, Health semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, MultiClusterDslPackage.Literals.DEPLOYMENT__IMAGE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MultiClusterDslPackage.Literals.DEPLOYMENT__IMAGE));
-			if (transientValues.isValueTransient(semanticObject, MultiClusterDslPackage.Literals.DEPLOYMENT__REPLICAS) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MultiClusterDslPackage.Literals.DEPLOYMENT__REPLICAS));
-			if (transientValues.isValueTransient(semanticObject, MultiClusterDslPackage.Literals.DEPLOYMENT__RESOURCES) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MultiClusterDslPackage.Literals.DEPLOYMENT__RESOURCES));
+			if (transientValues.isValueTransient(semanticObject, MultiClusterDslPackage.Literals.HEALTH__READINESS_PATH) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MultiClusterDslPackage.Literals.HEALTH__READINESS_PATH));
+			if (transientValues.isValueTransient(semanticObject, MultiClusterDslPackage.Literals.HEALTH__LIVENESS_PATH) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MultiClusterDslPackage.Literals.HEALTH__LIVENESS_PATH));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getDeploymentAccess().getImageSTRINGTerminalRuleCall_3_0(), semanticObject.getImage());
-		feeder.accept(grammarAccess.getDeploymentAccess().getReplicasINTTerminalRuleCall_5_0(), semanticObject.getReplicas());
-		feeder.accept(grammarAccess.getDeploymentAccess().getResourcesResourcesParserRuleCall_6_0(), semanticObject.getResources());
+		feeder.accept(grammarAccess.getHealthAccess().getReadinessPathSTRINGTerminalRuleCall_3_0(), semanticObject.getReadinessPath());
+		feeder.accept(grammarAccess.getHealthAccess().getLivenessPathSTRINGTerminalRuleCall_5_0(), semanticObject.getLivenessPath());
 		feeder.finish();
 	}
 	
@@ -173,6 +274,32 @@ public class MultiClusterDslSemanticSequencer extends AbstractDelegatingSemantic
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getResourcesAccess().getCpuSTRINGTerminalRuleCall_3_0(), semanticObject.getCpu());
 		feeder.accept(grammarAccess.getResourcesAccess().getMemorySTRINGTerminalRuleCall_5_0(), semanticObject.getMemory());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Service returns Service
+	 *
+	 * Constraint:
+	 *     (type=ServiceType port=INT targetPort=INT)
+	 * </pre>
+	 */
+	protected void sequence_Service(ISerializationContext context, Service semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MultiClusterDslPackage.Literals.SERVICE__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MultiClusterDslPackage.Literals.SERVICE__TYPE));
+			if (transientValues.isValueTransient(semanticObject, MultiClusterDslPackage.Literals.SERVICE__PORT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MultiClusterDslPackage.Literals.SERVICE__PORT));
+			if (transientValues.isValueTransient(semanticObject, MultiClusterDslPackage.Literals.SERVICE__TARGET_PORT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MultiClusterDslPackage.Literals.SERVICE__TARGET_PORT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getServiceAccess().getTypeServiceTypeEnumRuleCall_3_0(), semanticObject.getType());
+		feeder.accept(grammarAccess.getServiceAccess().getPortINTTerminalRuleCall_5_0(), semanticObject.getPort());
+		feeder.accept(grammarAccess.getServiceAccess().getTargetPortINTTerminalRuleCall_7_0(), semanticObject.getTargetPort());
 		feeder.finish();
 	}
 	
