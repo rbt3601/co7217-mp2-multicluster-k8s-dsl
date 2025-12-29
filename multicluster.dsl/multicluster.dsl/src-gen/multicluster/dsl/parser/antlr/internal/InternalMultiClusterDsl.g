@@ -23,6 +23,7 @@ import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
@@ -139,11 +140,35 @@ ruleApplication returns [EObject current=null]
 			newLeafNode(otherlv_2, grammarAccess.getApplicationAccess().getLeftCurlyBracketKeyword_2());
 		}
 		(
+			otherlv_3='namespace'
+			{
+				newLeafNode(otherlv_3, grammarAccess.getApplicationAccess().getNamespaceKeyword_3_0());
+			}
+			(
+				(
+					lv_namespace_4_0=RULE_STRING
+					{
+						newLeafNode(lv_namespace_4_0, grammarAccess.getApplicationAccess().getNamespaceSTRINGTerminalRuleCall_3_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getApplicationRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"namespace",
+							lv_namespace_4_0,
+							"org.eclipse.xtext.common.Terminals.STRING");
+					}
+				)
+			)
+		)?
+		(
 			(
 				{
-					newCompositeNode(grammarAccess.getApplicationAccess().getClustersClusterParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getApplicationAccess().getClustersClusterParserRuleCall_4_0());
 				}
-				lv_clusters_3_0=ruleCluster
+				lv_clusters_5_0=ruleCluster
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getApplicationRule());
@@ -151,15 +176,15 @@ ruleApplication returns [EObject current=null]
 					add(
 						$current,
 						"clusters",
-						lv_clusters_3_0,
+						lv_clusters_5_0,
 						"multicluster.dsl.MultiClusterDsl.Cluster");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)*
-		otherlv_4='}'
+		otherlv_6='}'
 		{
-			newLeafNode(otherlv_4, grammarAccess.getApplicationAccess().getRightCurlyBracketKeyword_4());
+			newLeafNode(otherlv_6, grammarAccess.getApplicationAccess().getRightCurlyBracketKeyword_5());
 		}
 	)
 ;
@@ -228,9 +253,28 @@ ruleCluster returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getClusterAccess().getIngressIngressParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getClusterAccess().getServiceServiceParserRuleCall_4_0());
 				}
-				lv_ingress_4_0=ruleIngress
+				lv_service_4_0=ruleService
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getClusterRule());
+					}
+					set(
+						$current,
+						"service",
+						lv_service_4_0,
+						"multicluster.dsl.MultiClusterDsl.Service");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getClusterAccess().getIngressIngressParserRuleCall_5_0());
+				}
+				lv_ingress_5_0=ruleIngress
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getClusterRule());
@@ -238,15 +282,53 @@ ruleCluster returns [EObject current=null]
 					set(
 						$current,
 						"ingress",
-						lv_ingress_4_0,
+						lv_ingress_5_0,
 						"multicluster.dsl.MultiClusterDsl.Ingress");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)?
-		otherlv_5='}'
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getClusterAccess().getConfigMapConfigMapParserRuleCall_6_0());
+				}
+				lv_configMap_6_0=ruleConfigMap
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getClusterRule());
+					}
+					set(
+						$current,
+						"configMap",
+						lv_configMap_6_0,
+						"multicluster.dsl.MultiClusterDsl.ConfigMap");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getClusterAccess().getAutoscalingAutoScalingParserRuleCall_7_0());
+				}
+				lv_autoscaling_7_0=ruleAutoScaling
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getClusterRule());
+					}
+					set(
+						$current,
+						"autoscaling",
+						lv_autoscaling_7_0,
+						"multicluster.dsl.MultiClusterDsl.AutoScaling");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
+		otherlv_8='}'
 		{
-			newLeafNode(otherlv_5, grammarAccess.getClusterAccess().getRightCurlyBracketKeyword_5());
+			newLeafNode(otherlv_8, grammarAccess.getClusterAccess().getRightCurlyBracketKeyword_8());
 		}
 	)
 ;
@@ -338,9 +420,28 @@ ruleDeployment returns [EObject current=null]
 				}
 			)
 		)
-		otherlv_7='}'
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getDeploymentAccess().getHealthHealthParserRuleCall_7_0());
+				}
+				lv_health_7_0=ruleHealth
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getDeploymentRule());
+					}
+					set(
+						$current,
+						"health",
+						lv_health_7_0,
+						"multicluster.dsl.MultiClusterDsl.Health");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
+		otherlv_8='}'
 		{
-			newLeafNode(otherlv_7, grammarAccess.getDeploymentAccess().getRightCurlyBracketKeyword_7());
+			newLeafNode(otherlv_8, grammarAccess.getDeploymentAccess().getRightCurlyBracketKeyword_8());
 		}
 	)
 ;
@@ -420,6 +521,179 @@ ruleResources returns [EObject current=null]
 	)
 ;
 
+// Entry rule entryRuleHealth
+entryRuleHealth returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getHealthRule()); }
+	iv_ruleHealth=ruleHealth
+	{ $current=$iv_ruleHealth.current; }
+	EOF;
+
+// Rule Health
+ruleHealth returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='health'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getHealthAccess().getHealthKeyword_0());
+		}
+		otherlv_1='{'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getHealthAccess().getLeftCurlyBracketKeyword_1());
+		}
+		otherlv_2='readinessPath'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getHealthAccess().getReadinessPathKeyword_2());
+		}
+		(
+			(
+				lv_readinessPath_3_0=RULE_STRING
+				{
+					newLeafNode(lv_readinessPath_3_0, grammarAccess.getHealthAccess().getReadinessPathSTRINGTerminalRuleCall_3_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getHealthRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"readinessPath",
+						lv_readinessPath_3_0,
+						"org.eclipse.xtext.common.Terminals.STRING");
+				}
+			)
+		)
+		otherlv_4='livenessPath'
+		{
+			newLeafNode(otherlv_4, grammarAccess.getHealthAccess().getLivenessPathKeyword_4());
+		}
+		(
+			(
+				lv_livenessPath_5_0=RULE_STRING
+				{
+					newLeafNode(lv_livenessPath_5_0, grammarAccess.getHealthAccess().getLivenessPathSTRINGTerminalRuleCall_5_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getHealthRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"livenessPath",
+						lv_livenessPath_5_0,
+						"org.eclipse.xtext.common.Terminals.STRING");
+				}
+			)
+		)
+		otherlv_6='}'
+		{
+			newLeafNode(otherlv_6, grammarAccess.getHealthAccess().getRightCurlyBracketKeyword_6());
+		}
+	)
+;
+
+// Entry rule entryRuleService
+entryRuleService returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getServiceRule()); }
+	iv_ruleService=ruleService
+	{ $current=$iv_ruleService.current; }
+	EOF;
+
+// Rule Service
+ruleService returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='service'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getServiceAccess().getServiceKeyword_0());
+		}
+		otherlv_1='{'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getServiceAccess().getLeftCurlyBracketKeyword_1());
+		}
+		otherlv_2='type'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getServiceAccess().getTypeKeyword_2());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getServiceAccess().getTypeServiceTypeEnumRuleCall_3_0());
+				}
+				lv_type_3_0=ruleServiceType
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getServiceRule());
+					}
+					set(
+						$current,
+						"type",
+						lv_type_3_0,
+						"multicluster.dsl.MultiClusterDsl.ServiceType");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_4='port'
+		{
+			newLeafNode(otherlv_4, grammarAccess.getServiceAccess().getPortKeyword_4());
+		}
+		(
+			(
+				lv_port_5_0=RULE_INT
+				{
+					newLeafNode(lv_port_5_0, grammarAccess.getServiceAccess().getPortINTTerminalRuleCall_5_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getServiceRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"port",
+						lv_port_5_0,
+						"org.eclipse.xtext.common.Terminals.INT");
+				}
+			)
+		)
+		otherlv_6='targetPort'
+		{
+			newLeafNode(otherlv_6, grammarAccess.getServiceAccess().getTargetPortKeyword_6());
+		}
+		(
+			(
+				lv_targetPort_7_0=RULE_INT
+				{
+					newLeafNode(lv_targetPort_7_0, grammarAccess.getServiceAccess().getTargetPortINTTerminalRuleCall_7_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getServiceRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"targetPort",
+						lv_targetPort_7_0,
+						"org.eclipse.xtext.common.Terminals.INT");
+				}
+			)
+		)
+		otherlv_8='}'
+		{
+			newLeafNode(otherlv_8, grammarAccess.getServiceAccess().getRightCurlyBracketKeyword_8());
+		}
+	)
+;
+
 // Entry rule entryRuleIngress
 entryRuleIngress returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getIngressRule()); }
@@ -470,6 +744,261 @@ ruleIngress returns [EObject current=null]
 		{
 			newLeafNode(otherlv_4, grammarAccess.getIngressAccess().getRightCurlyBracketKeyword_4());
 		}
+	)
+;
+
+// Entry rule entryRuleConfigMap
+entryRuleConfigMap returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getConfigMapRule()); }
+	iv_ruleConfigMap=ruleConfigMap
+	{ $current=$iv_ruleConfigMap.current; }
+	EOF;
+
+// Rule ConfigMap
+ruleConfigMap returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='configMap'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getConfigMapAccess().getConfigMapKeyword_0());
+		}
+		(
+			(
+				lv_name_1_0=RULE_ID
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getConfigMapAccess().getNameIDTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getConfigMapRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)
+		otherlv_2='{'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getConfigMapAccess().getLeftCurlyBracketKeyword_2());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getConfigMapAccess().getEntriesConfigEntryParserRuleCall_3_0());
+				}
+				lv_entries_3_0=ruleConfigEntry
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getConfigMapRule());
+					}
+					add(
+						$current,
+						"entries",
+						lv_entries_3_0,
+						"multicluster.dsl.MultiClusterDsl.ConfigEntry");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)+
+		otherlv_4='}'
+		{
+			newLeafNode(otherlv_4, grammarAccess.getConfigMapAccess().getRightCurlyBracketKeyword_4());
+		}
+	)
+;
+
+// Entry rule entryRuleConfigEntry
+entryRuleConfigEntry returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getConfigEntryRule()); }
+	iv_ruleConfigEntry=ruleConfigEntry
+	{ $current=$iv_ruleConfigEntry.current; }
+	EOF;
+
+// Rule ConfigEntry
+ruleConfigEntry returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				lv_key_0_0=RULE_ID
+				{
+					newLeafNode(lv_key_0_0, grammarAccess.getConfigEntryAccess().getKeyIDTerminalRuleCall_0_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getConfigEntryRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"key",
+						lv_key_0_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)
+		(
+			(
+				lv_value_1_0=RULE_STRING
+				{
+					newLeafNode(lv_value_1_0, grammarAccess.getConfigEntryAccess().getValueSTRINGTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getConfigEntryRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"value",
+						lv_value_1_0,
+						"org.eclipse.xtext.common.Terminals.STRING");
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleAutoScaling
+entryRuleAutoScaling returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getAutoScalingRule()); }
+	iv_ruleAutoScaling=ruleAutoScaling
+	{ $current=$iv_ruleAutoScaling.current; }
+	EOF;
+
+// Rule AutoScaling
+ruleAutoScaling returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='autoscaling'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getAutoScalingAccess().getAutoscalingKeyword_0());
+		}
+		otherlv_1='{'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getAutoScalingAccess().getLeftCurlyBracketKeyword_1());
+		}
+		otherlv_2='minReplicas'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getAutoScalingAccess().getMinReplicasKeyword_2());
+		}
+		(
+			(
+				lv_minReplicas_3_0=RULE_INT
+				{
+					newLeafNode(lv_minReplicas_3_0, grammarAccess.getAutoScalingAccess().getMinReplicasINTTerminalRuleCall_3_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getAutoScalingRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"minReplicas",
+						lv_minReplicas_3_0,
+						"org.eclipse.xtext.common.Terminals.INT");
+				}
+			)
+		)
+		otherlv_4='maxReplicas'
+		{
+			newLeafNode(otherlv_4, grammarAccess.getAutoScalingAccess().getMaxReplicasKeyword_4());
+		}
+		(
+			(
+				lv_maxReplicas_5_0=RULE_INT
+				{
+					newLeafNode(lv_maxReplicas_5_0, grammarAccess.getAutoScalingAccess().getMaxReplicasINTTerminalRuleCall_5_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getAutoScalingRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"maxReplicas",
+						lv_maxReplicas_5_0,
+						"org.eclipse.xtext.common.Terminals.INT");
+				}
+			)
+		)
+		otherlv_6='cpuUtilization'
+		{
+			newLeafNode(otherlv_6, grammarAccess.getAutoScalingAccess().getCpuUtilizationKeyword_6());
+		}
+		(
+			(
+				lv_cpuUtilization_7_0=RULE_INT
+				{
+					newLeafNode(lv_cpuUtilization_7_0, grammarAccess.getAutoScalingAccess().getCpuUtilizationINTTerminalRuleCall_7_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getAutoScalingRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"cpuUtilization",
+						lv_cpuUtilization_7_0,
+						"org.eclipse.xtext.common.Terminals.INT");
+				}
+			)
+		)
+		otherlv_8='}'
+		{
+			newLeafNode(otherlv_8, grammarAccess.getAutoScalingAccess().getRightCurlyBracketKeyword_8());
+		}
+	)
+;
+
+// Rule ServiceType
+ruleServiceType returns [Enumerator current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			enumLiteral_0='ClusterIP'
+			{
+				$current = grammarAccess.getServiceTypeAccess().getClusterIPEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_0, grammarAccess.getServiceTypeAccess().getClusterIPEnumLiteralDeclaration_0());
+			}
+		)
+		    |
+		(
+			enumLiteral_1='NodePort'
+			{
+				$current = grammarAccess.getServiceTypeAccess().getNodePortEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_1, grammarAccess.getServiceTypeAccess().getNodePortEnumLiteralDeclaration_1());
+			}
+		)
+		    |
+		(
+			enumLiteral_2='LoadBalancer'
+			{
+				$current = grammarAccess.getServiceTypeAccess().getLoadBalancerEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_2, grammarAccess.getServiceTypeAccess().getLoadBalancerEnumLiteralDeclaration_2());
+			}
+		)
 	)
 ;
 

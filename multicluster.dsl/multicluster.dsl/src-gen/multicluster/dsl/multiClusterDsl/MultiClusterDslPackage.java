@@ -5,6 +5,7 @@ package multicluster.dsl.multiClusterDsl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -105,13 +106,22 @@ public interface MultiClusterDslPackage extends EPackage
   int APPLICATION__NAME = 0;
 
   /**
+   * The feature id for the '<em><b>Namespace</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int APPLICATION__NAMESPACE = 1;
+
+  /**
    * The feature id for the '<em><b>Clusters</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int APPLICATION__CLUSTERS = 1;
+  int APPLICATION__CLUSTERS = 2;
 
   /**
    * The number of structural features of the '<em>Application</em>' class.
@@ -120,7 +130,7 @@ public interface MultiClusterDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int APPLICATION_FEATURE_COUNT = 2;
+  int APPLICATION_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link multicluster.dsl.multiClusterDsl.impl.ClusterImpl <em>Cluster</em>}' class.
@@ -151,13 +161,40 @@ public interface MultiClusterDslPackage extends EPackage
   int CLUSTER__DEPLOYMENT = 1;
 
   /**
+   * The feature id for the '<em><b>Service</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CLUSTER__SERVICE = 2;
+
+  /**
    * The feature id for the '<em><b>Ingress</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CLUSTER__INGRESS = 2;
+  int CLUSTER__INGRESS = 3;
+
+  /**
+   * The feature id for the '<em><b>Config Map</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CLUSTER__CONFIG_MAP = 4;
+
+  /**
+   * The feature id for the '<em><b>Autoscaling</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CLUSTER__AUTOSCALING = 5;
 
   /**
    * The number of structural features of the '<em>Cluster</em>' class.
@@ -166,7 +203,7 @@ public interface MultiClusterDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int CLUSTER_FEATURE_COUNT = 3;
+  int CLUSTER_FEATURE_COUNT = 6;
 
   /**
    * The meta object id for the '{@link multicluster.dsl.multiClusterDsl.impl.DeploymentImpl <em>Deployment</em>}' class.
@@ -206,13 +243,22 @@ public interface MultiClusterDslPackage extends EPackage
   int DEPLOYMENT__RESOURCES = 2;
 
   /**
+   * The feature id for the '<em><b>Health</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DEPLOYMENT__HEALTH = 3;
+
+  /**
    * The number of structural features of the '<em>Deployment</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DEPLOYMENT_FEATURE_COUNT = 3;
+  int DEPLOYMENT_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link multicluster.dsl.multiClusterDsl.impl.ResourcesImpl <em>Resources</em>}' class.
@@ -252,6 +298,89 @@ public interface MultiClusterDslPackage extends EPackage
   int RESOURCES_FEATURE_COUNT = 2;
 
   /**
+   * The meta object id for the '{@link multicluster.dsl.multiClusterDsl.impl.HealthImpl <em>Health</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see multicluster.dsl.multiClusterDsl.impl.HealthImpl
+   * @see multicluster.dsl.multiClusterDsl.impl.MultiClusterDslPackageImpl#getHealth()
+   * @generated
+   */
+  int HEALTH = 5;
+
+  /**
+   * The feature id for the '<em><b>Readiness Path</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int HEALTH__READINESS_PATH = 0;
+
+  /**
+   * The feature id for the '<em><b>Liveness Path</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int HEALTH__LIVENESS_PATH = 1;
+
+  /**
+   * The number of structural features of the '<em>Health</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int HEALTH_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link multicluster.dsl.multiClusterDsl.impl.ServiceImpl <em>Service</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see multicluster.dsl.multiClusterDsl.impl.ServiceImpl
+   * @see multicluster.dsl.multiClusterDsl.impl.MultiClusterDslPackageImpl#getService()
+   * @generated
+   */
+  int SERVICE = 6;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SERVICE__TYPE = 0;
+
+  /**
+   * The feature id for the '<em><b>Port</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SERVICE__PORT = 1;
+
+  /**
+   * The feature id for the '<em><b>Target Port</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SERVICE__TARGET_PORT = 2;
+
+  /**
+   * The number of structural features of the '<em>Service</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SERVICE_FEATURE_COUNT = 3;
+
+  /**
    * The meta object id for the '{@link multicluster.dsl.multiClusterDsl.impl.IngressImpl <em>Ingress</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -259,7 +388,7 @@ public interface MultiClusterDslPackage extends EPackage
    * @see multicluster.dsl.multiClusterDsl.impl.MultiClusterDslPackageImpl#getIngress()
    * @generated
    */
-  int INGRESS = 5;
+  int INGRESS = 7;
 
   /**
    * The feature id for the '<em><b>Path</b></em>' attribute.
@@ -278,6 +407,136 @@ public interface MultiClusterDslPackage extends EPackage
    * @ordered
    */
   int INGRESS_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link multicluster.dsl.multiClusterDsl.impl.ConfigMapImpl <em>Config Map</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see multicluster.dsl.multiClusterDsl.impl.ConfigMapImpl
+   * @see multicluster.dsl.multiClusterDsl.impl.MultiClusterDslPackageImpl#getConfigMap()
+   * @generated
+   */
+  int CONFIG_MAP = 8;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONFIG_MAP__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Entries</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONFIG_MAP__ENTRIES = 1;
+
+  /**
+   * The number of structural features of the '<em>Config Map</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONFIG_MAP_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link multicluster.dsl.multiClusterDsl.impl.ConfigEntryImpl <em>Config Entry</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see multicluster.dsl.multiClusterDsl.impl.ConfigEntryImpl
+   * @see multicluster.dsl.multiClusterDsl.impl.MultiClusterDslPackageImpl#getConfigEntry()
+   * @generated
+   */
+  int CONFIG_ENTRY = 9;
+
+  /**
+   * The feature id for the '<em><b>Key</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONFIG_ENTRY__KEY = 0;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONFIG_ENTRY__VALUE = 1;
+
+  /**
+   * The number of structural features of the '<em>Config Entry</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONFIG_ENTRY_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link multicluster.dsl.multiClusterDsl.impl.AutoScalingImpl <em>Auto Scaling</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see multicluster.dsl.multiClusterDsl.impl.AutoScalingImpl
+   * @see multicluster.dsl.multiClusterDsl.impl.MultiClusterDslPackageImpl#getAutoScaling()
+   * @generated
+   */
+  int AUTO_SCALING = 10;
+
+  /**
+   * The feature id for the '<em><b>Min Replicas</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AUTO_SCALING__MIN_REPLICAS = 0;
+
+  /**
+   * The feature id for the '<em><b>Max Replicas</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AUTO_SCALING__MAX_REPLICAS = 1;
+
+  /**
+   * The feature id for the '<em><b>Cpu Utilization</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AUTO_SCALING__CPU_UTILIZATION = 2;
+
+  /**
+   * The number of structural features of the '<em>Auto Scaling</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AUTO_SCALING_FEATURE_COUNT = 3;
+
+  /**
+   * The meta object id for the '{@link multicluster.dsl.multiClusterDsl.ServiceType <em>Service Type</em>}' enum.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see multicluster.dsl.multiClusterDsl.ServiceType
+   * @see multicluster.dsl.multiClusterDsl.impl.MultiClusterDslPackageImpl#getServiceType()
+   * @generated
+   */
+  int SERVICE_TYPE = 11;
 
 
   /**
@@ -323,6 +582,17 @@ public interface MultiClusterDslPackage extends EPackage
   EAttribute getApplication_Name();
 
   /**
+   * Returns the meta object for the attribute '{@link multicluster.dsl.multiClusterDsl.Application#getNamespace <em>Namespace</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Namespace</em>'.
+   * @see multicluster.dsl.multiClusterDsl.Application#getNamespace()
+   * @see #getApplication()
+   * @generated
+   */
+  EAttribute getApplication_Namespace();
+
+  /**
    * Returns the meta object for the containment reference list '{@link multicluster.dsl.multiClusterDsl.Application#getClusters <em>Clusters</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -366,6 +636,17 @@ public interface MultiClusterDslPackage extends EPackage
   EReference getCluster_Deployment();
 
   /**
+   * Returns the meta object for the containment reference '{@link multicluster.dsl.multiClusterDsl.Cluster#getService <em>Service</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Service</em>'.
+   * @see multicluster.dsl.multiClusterDsl.Cluster#getService()
+   * @see #getCluster()
+   * @generated
+   */
+  EReference getCluster_Service();
+
+  /**
    * Returns the meta object for the containment reference '{@link multicluster.dsl.multiClusterDsl.Cluster#getIngress <em>Ingress</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -375,6 +656,28 @@ public interface MultiClusterDslPackage extends EPackage
    * @generated
    */
   EReference getCluster_Ingress();
+
+  /**
+   * Returns the meta object for the containment reference '{@link multicluster.dsl.multiClusterDsl.Cluster#getConfigMap <em>Config Map</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Config Map</em>'.
+   * @see multicluster.dsl.multiClusterDsl.Cluster#getConfigMap()
+   * @see #getCluster()
+   * @generated
+   */
+  EReference getCluster_ConfigMap();
+
+  /**
+   * Returns the meta object for the containment reference '{@link multicluster.dsl.multiClusterDsl.Cluster#getAutoscaling <em>Autoscaling</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Autoscaling</em>'.
+   * @see multicluster.dsl.multiClusterDsl.Cluster#getAutoscaling()
+   * @see #getCluster()
+   * @generated
+   */
+  EReference getCluster_Autoscaling();
 
   /**
    * Returns the meta object for class '{@link multicluster.dsl.multiClusterDsl.Deployment <em>Deployment</em>}'.
@@ -420,6 +723,17 @@ public interface MultiClusterDslPackage extends EPackage
   EReference getDeployment_Resources();
 
   /**
+   * Returns the meta object for the containment reference '{@link multicluster.dsl.multiClusterDsl.Deployment#getHealth <em>Health</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Health</em>'.
+   * @see multicluster.dsl.multiClusterDsl.Deployment#getHealth()
+   * @see #getDeployment()
+   * @generated
+   */
+  EReference getDeployment_Health();
+
+  /**
    * Returns the meta object for class '{@link multicluster.dsl.multiClusterDsl.Resources <em>Resources</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -452,6 +766,81 @@ public interface MultiClusterDslPackage extends EPackage
   EAttribute getResources_Memory();
 
   /**
+   * Returns the meta object for class '{@link multicluster.dsl.multiClusterDsl.Health <em>Health</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Health</em>'.
+   * @see multicluster.dsl.multiClusterDsl.Health
+   * @generated
+   */
+  EClass getHealth();
+
+  /**
+   * Returns the meta object for the attribute '{@link multicluster.dsl.multiClusterDsl.Health#getReadinessPath <em>Readiness Path</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Readiness Path</em>'.
+   * @see multicluster.dsl.multiClusterDsl.Health#getReadinessPath()
+   * @see #getHealth()
+   * @generated
+   */
+  EAttribute getHealth_ReadinessPath();
+
+  /**
+   * Returns the meta object for the attribute '{@link multicluster.dsl.multiClusterDsl.Health#getLivenessPath <em>Liveness Path</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Liveness Path</em>'.
+   * @see multicluster.dsl.multiClusterDsl.Health#getLivenessPath()
+   * @see #getHealth()
+   * @generated
+   */
+  EAttribute getHealth_LivenessPath();
+
+  /**
+   * Returns the meta object for class '{@link multicluster.dsl.multiClusterDsl.Service <em>Service</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Service</em>'.
+   * @see multicluster.dsl.multiClusterDsl.Service
+   * @generated
+   */
+  EClass getService();
+
+  /**
+   * Returns the meta object for the attribute '{@link multicluster.dsl.multiClusterDsl.Service#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Type</em>'.
+   * @see multicluster.dsl.multiClusterDsl.Service#getType()
+   * @see #getService()
+   * @generated
+   */
+  EAttribute getService_Type();
+
+  /**
+   * Returns the meta object for the attribute '{@link multicluster.dsl.multiClusterDsl.Service#getPort <em>Port</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Port</em>'.
+   * @see multicluster.dsl.multiClusterDsl.Service#getPort()
+   * @see #getService()
+   * @generated
+   */
+  EAttribute getService_Port();
+
+  /**
+   * Returns the meta object for the attribute '{@link multicluster.dsl.multiClusterDsl.Service#getTargetPort <em>Target Port</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Target Port</em>'.
+   * @see multicluster.dsl.multiClusterDsl.Service#getTargetPort()
+   * @see #getService()
+   * @generated
+   */
+  EAttribute getService_TargetPort();
+
+  /**
    * Returns the meta object for class '{@link multicluster.dsl.multiClusterDsl.Ingress <em>Ingress</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -471,6 +860,123 @@ public interface MultiClusterDslPackage extends EPackage
    * @generated
    */
   EAttribute getIngress_Path();
+
+  /**
+   * Returns the meta object for class '{@link multicluster.dsl.multiClusterDsl.ConfigMap <em>Config Map</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Config Map</em>'.
+   * @see multicluster.dsl.multiClusterDsl.ConfigMap
+   * @generated
+   */
+  EClass getConfigMap();
+
+  /**
+   * Returns the meta object for the attribute '{@link multicluster.dsl.multiClusterDsl.ConfigMap#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see multicluster.dsl.multiClusterDsl.ConfigMap#getName()
+   * @see #getConfigMap()
+   * @generated
+   */
+  EAttribute getConfigMap_Name();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link multicluster.dsl.multiClusterDsl.ConfigMap#getEntries <em>Entries</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Entries</em>'.
+   * @see multicluster.dsl.multiClusterDsl.ConfigMap#getEntries()
+   * @see #getConfigMap()
+   * @generated
+   */
+  EReference getConfigMap_Entries();
+
+  /**
+   * Returns the meta object for class '{@link multicluster.dsl.multiClusterDsl.ConfigEntry <em>Config Entry</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Config Entry</em>'.
+   * @see multicluster.dsl.multiClusterDsl.ConfigEntry
+   * @generated
+   */
+  EClass getConfigEntry();
+
+  /**
+   * Returns the meta object for the attribute '{@link multicluster.dsl.multiClusterDsl.ConfigEntry#getKey <em>Key</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Key</em>'.
+   * @see multicluster.dsl.multiClusterDsl.ConfigEntry#getKey()
+   * @see #getConfigEntry()
+   * @generated
+   */
+  EAttribute getConfigEntry_Key();
+
+  /**
+   * Returns the meta object for the attribute '{@link multicluster.dsl.multiClusterDsl.ConfigEntry#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see multicluster.dsl.multiClusterDsl.ConfigEntry#getValue()
+   * @see #getConfigEntry()
+   * @generated
+   */
+  EAttribute getConfigEntry_Value();
+
+  /**
+   * Returns the meta object for class '{@link multicluster.dsl.multiClusterDsl.AutoScaling <em>Auto Scaling</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Auto Scaling</em>'.
+   * @see multicluster.dsl.multiClusterDsl.AutoScaling
+   * @generated
+   */
+  EClass getAutoScaling();
+
+  /**
+   * Returns the meta object for the attribute '{@link multicluster.dsl.multiClusterDsl.AutoScaling#getMinReplicas <em>Min Replicas</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Min Replicas</em>'.
+   * @see multicluster.dsl.multiClusterDsl.AutoScaling#getMinReplicas()
+   * @see #getAutoScaling()
+   * @generated
+   */
+  EAttribute getAutoScaling_MinReplicas();
+
+  /**
+   * Returns the meta object for the attribute '{@link multicluster.dsl.multiClusterDsl.AutoScaling#getMaxReplicas <em>Max Replicas</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Max Replicas</em>'.
+   * @see multicluster.dsl.multiClusterDsl.AutoScaling#getMaxReplicas()
+   * @see #getAutoScaling()
+   * @generated
+   */
+  EAttribute getAutoScaling_MaxReplicas();
+
+  /**
+   * Returns the meta object for the attribute '{@link multicluster.dsl.multiClusterDsl.AutoScaling#getCpuUtilization <em>Cpu Utilization</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Cpu Utilization</em>'.
+   * @see multicluster.dsl.multiClusterDsl.AutoScaling#getCpuUtilization()
+   * @see #getAutoScaling()
+   * @generated
+   */
+  EAttribute getAutoScaling_CpuUtilization();
+
+  /**
+   * Returns the meta object for enum '{@link multicluster.dsl.multiClusterDsl.ServiceType <em>Service Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for enum '<em>Service Type</em>'.
+   * @see multicluster.dsl.multiClusterDsl.ServiceType
+   * @generated
+   */
+  EEnum getServiceType();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -532,6 +1038,14 @@ public interface MultiClusterDslPackage extends EPackage
     EAttribute APPLICATION__NAME = eINSTANCE.getApplication_Name();
 
     /**
+     * The meta object literal for the '<em><b>Namespace</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute APPLICATION__NAMESPACE = eINSTANCE.getApplication_Namespace();
+
+    /**
      * The meta object literal for the '<em><b>Clusters</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -566,12 +1080,36 @@ public interface MultiClusterDslPackage extends EPackage
     EReference CLUSTER__DEPLOYMENT = eINSTANCE.getCluster_Deployment();
 
     /**
+     * The meta object literal for the '<em><b>Service</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CLUSTER__SERVICE = eINSTANCE.getCluster_Service();
+
+    /**
      * The meta object literal for the '<em><b>Ingress</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EReference CLUSTER__INGRESS = eINSTANCE.getCluster_Ingress();
+
+    /**
+     * The meta object literal for the '<em><b>Config Map</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CLUSTER__CONFIG_MAP = eINSTANCE.getCluster_ConfigMap();
+
+    /**
+     * The meta object literal for the '<em><b>Autoscaling</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CLUSTER__AUTOSCALING = eINSTANCE.getCluster_Autoscaling();
 
     /**
      * The meta object literal for the '{@link multicluster.dsl.multiClusterDsl.impl.DeploymentImpl <em>Deployment</em>}' class.
@@ -608,6 +1146,14 @@ public interface MultiClusterDslPackage extends EPackage
     EReference DEPLOYMENT__RESOURCES = eINSTANCE.getDeployment_Resources();
 
     /**
+     * The meta object literal for the '<em><b>Health</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference DEPLOYMENT__HEALTH = eINSTANCE.getDeployment_Health();
+
+    /**
      * The meta object literal for the '{@link multicluster.dsl.multiClusterDsl.impl.ResourcesImpl <em>Resources</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -634,6 +1180,66 @@ public interface MultiClusterDslPackage extends EPackage
     EAttribute RESOURCES__MEMORY = eINSTANCE.getResources_Memory();
 
     /**
+     * The meta object literal for the '{@link multicluster.dsl.multiClusterDsl.impl.HealthImpl <em>Health</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see multicluster.dsl.multiClusterDsl.impl.HealthImpl
+     * @see multicluster.dsl.multiClusterDsl.impl.MultiClusterDslPackageImpl#getHealth()
+     * @generated
+     */
+    EClass HEALTH = eINSTANCE.getHealth();
+
+    /**
+     * The meta object literal for the '<em><b>Readiness Path</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute HEALTH__READINESS_PATH = eINSTANCE.getHealth_ReadinessPath();
+
+    /**
+     * The meta object literal for the '<em><b>Liveness Path</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute HEALTH__LIVENESS_PATH = eINSTANCE.getHealth_LivenessPath();
+
+    /**
+     * The meta object literal for the '{@link multicluster.dsl.multiClusterDsl.impl.ServiceImpl <em>Service</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see multicluster.dsl.multiClusterDsl.impl.ServiceImpl
+     * @see multicluster.dsl.multiClusterDsl.impl.MultiClusterDslPackageImpl#getService()
+     * @generated
+     */
+    EClass SERVICE = eINSTANCE.getService();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SERVICE__TYPE = eINSTANCE.getService_Type();
+
+    /**
+     * The meta object literal for the '<em><b>Port</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SERVICE__PORT = eINSTANCE.getService_Port();
+
+    /**
+     * The meta object literal for the '<em><b>Target Port</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SERVICE__TARGET_PORT = eINSTANCE.getService_TargetPort();
+
+    /**
      * The meta object literal for the '{@link multicluster.dsl.multiClusterDsl.impl.IngressImpl <em>Ingress</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -650,6 +1256,102 @@ public interface MultiClusterDslPackage extends EPackage
      * @generated
      */
     EAttribute INGRESS__PATH = eINSTANCE.getIngress_Path();
+
+    /**
+     * The meta object literal for the '{@link multicluster.dsl.multiClusterDsl.impl.ConfigMapImpl <em>Config Map</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see multicluster.dsl.multiClusterDsl.impl.ConfigMapImpl
+     * @see multicluster.dsl.multiClusterDsl.impl.MultiClusterDslPackageImpl#getConfigMap()
+     * @generated
+     */
+    EClass CONFIG_MAP = eINSTANCE.getConfigMap();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute CONFIG_MAP__NAME = eINSTANCE.getConfigMap_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Entries</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CONFIG_MAP__ENTRIES = eINSTANCE.getConfigMap_Entries();
+
+    /**
+     * The meta object literal for the '{@link multicluster.dsl.multiClusterDsl.impl.ConfigEntryImpl <em>Config Entry</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see multicluster.dsl.multiClusterDsl.impl.ConfigEntryImpl
+     * @see multicluster.dsl.multiClusterDsl.impl.MultiClusterDslPackageImpl#getConfigEntry()
+     * @generated
+     */
+    EClass CONFIG_ENTRY = eINSTANCE.getConfigEntry();
+
+    /**
+     * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute CONFIG_ENTRY__KEY = eINSTANCE.getConfigEntry_Key();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute CONFIG_ENTRY__VALUE = eINSTANCE.getConfigEntry_Value();
+
+    /**
+     * The meta object literal for the '{@link multicluster.dsl.multiClusterDsl.impl.AutoScalingImpl <em>Auto Scaling</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see multicluster.dsl.multiClusterDsl.impl.AutoScalingImpl
+     * @see multicluster.dsl.multiClusterDsl.impl.MultiClusterDslPackageImpl#getAutoScaling()
+     * @generated
+     */
+    EClass AUTO_SCALING = eINSTANCE.getAutoScaling();
+
+    /**
+     * The meta object literal for the '<em><b>Min Replicas</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute AUTO_SCALING__MIN_REPLICAS = eINSTANCE.getAutoScaling_MinReplicas();
+
+    /**
+     * The meta object literal for the '<em><b>Max Replicas</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute AUTO_SCALING__MAX_REPLICAS = eINSTANCE.getAutoScaling_MaxReplicas();
+
+    /**
+     * The meta object literal for the '<em><b>Cpu Utilization</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute AUTO_SCALING__CPU_UTILIZATION = eINSTANCE.getAutoScaling_CpuUtilization();
+
+    /**
+     * The meta object literal for the '{@link multicluster.dsl.multiClusterDsl.ServiceType <em>Service Type</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see multicluster.dsl.multiClusterDsl.ServiceType
+     * @see multicluster.dsl.multiClusterDsl.impl.MultiClusterDslPackageImpl#getServiceType()
+     * @generated
+     */
+    EEnum SERVICE_TYPE = eINSTANCE.getServiceType();
 
   }
 

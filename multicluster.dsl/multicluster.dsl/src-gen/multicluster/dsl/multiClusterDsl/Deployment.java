@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link multicluster.dsl.multiClusterDsl.Deployment#getImage <em>Image</em>}</li>
  *   <li>{@link multicluster.dsl.multiClusterDsl.Deployment#getReplicas <em>Replicas</em>}</li>
  *   <li>{@link multicluster.dsl.multiClusterDsl.Deployment#getResources <em>Resources</em>}</li>
+ *   <li>{@link multicluster.dsl.multiClusterDsl.Deployment#getHealth <em>Health</em>}</li>
  * </ul>
  *
  * @see multicluster.dsl.multiClusterDsl.MultiClusterDslPackage#getDeployment()
@@ -90,5 +91,27 @@ public interface Deployment extends EObject
    * @generated
    */
   void setResources(Resources value);
+
+  /**
+   * Returns the value of the '<em><b>Health</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Health</em>' containment reference.
+   * @see #setHealth(Health)
+   * @see multicluster.dsl.multiClusterDsl.MultiClusterDslPackage#getDeployment_Health()
+   * @model containment="true"
+   * @generated
+   */
+  Health getHealth();
+
+  /**
+   * Sets the value of the '{@link multicluster.dsl.multiClusterDsl.Deployment#getHealth <em>Health</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Health</em>' containment reference.
+   * @see #getHealth()
+   * @generated
+   */
+  void setHealth(Health value);
 
 } // Deployment

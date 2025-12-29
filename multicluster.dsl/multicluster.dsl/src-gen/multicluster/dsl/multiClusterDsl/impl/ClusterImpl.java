@@ -3,10 +3,13 @@
  */
 package multicluster.dsl.multiClusterDsl.impl;
 
+import multicluster.dsl.multiClusterDsl.AutoScaling;
 import multicluster.dsl.multiClusterDsl.Cluster;
+import multicluster.dsl.multiClusterDsl.ConfigMap;
 import multicluster.dsl.multiClusterDsl.Deployment;
 import multicluster.dsl.multiClusterDsl.Ingress;
 import multicluster.dsl.multiClusterDsl.MultiClusterDslPackage;
+import multicluster.dsl.multiClusterDsl.Service;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -27,7 +30,10 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <ul>
  *   <li>{@link multicluster.dsl.multiClusterDsl.impl.ClusterImpl#getName <em>Name</em>}</li>
  *   <li>{@link multicluster.dsl.multiClusterDsl.impl.ClusterImpl#getDeployment <em>Deployment</em>}</li>
+ *   <li>{@link multicluster.dsl.multiClusterDsl.impl.ClusterImpl#getService <em>Service</em>}</li>
  *   <li>{@link multicluster.dsl.multiClusterDsl.impl.ClusterImpl#getIngress <em>Ingress</em>}</li>
+ *   <li>{@link multicluster.dsl.multiClusterDsl.impl.ClusterImpl#getConfigMap <em>Config Map</em>}</li>
+ *   <li>{@link multicluster.dsl.multiClusterDsl.impl.ClusterImpl#getAutoscaling <em>Autoscaling</em>}</li>
  * </ul>
  *
  * @generated
@@ -65,6 +71,16 @@ public class ClusterImpl extends MinimalEObjectImpl.Container implements Cluster
   protected Deployment deployment;
 
   /**
+   * The cached value of the '{@link #getService() <em>Service</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getService()
+   * @generated
+   * @ordered
+   */
+  protected Service service;
+
+  /**
    * The cached value of the '{@link #getIngress() <em>Ingress</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -73,6 +89,26 @@ public class ClusterImpl extends MinimalEObjectImpl.Container implements Cluster
    * @ordered
    */
   protected Ingress ingress;
+
+  /**
+   * The cached value of the '{@link #getConfigMap() <em>Config Map</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getConfigMap()
+   * @generated
+   * @ordered
+   */
+  protected ConfigMap configMap;
+
+  /**
+   * The cached value of the '{@link #getAutoscaling() <em>Autoscaling</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAutoscaling()
+   * @generated
+   * @ordered
+   */
+  protected AutoScaling autoscaling;
 
   /**
    * <!-- begin-user-doc -->
@@ -176,6 +212,56 @@ public class ClusterImpl extends MinimalEObjectImpl.Container implements Cluster
    * @generated
    */
   @Override
+  public Service getService()
+  {
+    return service;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetService(Service newService, NotificationChain msgs)
+  {
+    Service oldService = service;
+    service = newService;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MultiClusterDslPackage.CLUSTER__SERVICE, oldService, newService);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setService(Service newService)
+  {
+    if (newService != service)
+    {
+      NotificationChain msgs = null;
+      if (service != null)
+        msgs = ((InternalEObject)service).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MultiClusterDslPackage.CLUSTER__SERVICE, null, msgs);
+      if (newService != null)
+        msgs = ((InternalEObject)newService).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MultiClusterDslPackage.CLUSTER__SERVICE, null, msgs);
+      msgs = basicSetService(newService, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MultiClusterDslPackage.CLUSTER__SERVICE, newService, newService));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Ingress getIngress()
   {
     return ingress;
@@ -226,14 +312,120 @@ public class ClusterImpl extends MinimalEObjectImpl.Container implements Cluster
    * @generated
    */
   @Override
+  public ConfigMap getConfigMap()
+  {
+    return configMap;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetConfigMap(ConfigMap newConfigMap, NotificationChain msgs)
+  {
+    ConfigMap oldConfigMap = configMap;
+    configMap = newConfigMap;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MultiClusterDslPackage.CLUSTER__CONFIG_MAP, oldConfigMap, newConfigMap);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setConfigMap(ConfigMap newConfigMap)
+  {
+    if (newConfigMap != configMap)
+    {
+      NotificationChain msgs = null;
+      if (configMap != null)
+        msgs = ((InternalEObject)configMap).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MultiClusterDslPackage.CLUSTER__CONFIG_MAP, null, msgs);
+      if (newConfigMap != null)
+        msgs = ((InternalEObject)newConfigMap).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MultiClusterDslPackage.CLUSTER__CONFIG_MAP, null, msgs);
+      msgs = basicSetConfigMap(newConfigMap, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MultiClusterDslPackage.CLUSTER__CONFIG_MAP, newConfigMap, newConfigMap));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public AutoScaling getAutoscaling()
+  {
+    return autoscaling;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetAutoscaling(AutoScaling newAutoscaling, NotificationChain msgs)
+  {
+    AutoScaling oldAutoscaling = autoscaling;
+    autoscaling = newAutoscaling;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MultiClusterDslPackage.CLUSTER__AUTOSCALING, oldAutoscaling, newAutoscaling);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setAutoscaling(AutoScaling newAutoscaling)
+  {
+    if (newAutoscaling != autoscaling)
+    {
+      NotificationChain msgs = null;
+      if (autoscaling != null)
+        msgs = ((InternalEObject)autoscaling).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MultiClusterDslPackage.CLUSTER__AUTOSCALING, null, msgs);
+      if (newAutoscaling != null)
+        msgs = ((InternalEObject)newAutoscaling).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MultiClusterDslPackage.CLUSTER__AUTOSCALING, null, msgs);
+      msgs = basicSetAutoscaling(newAutoscaling, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MultiClusterDslPackage.CLUSTER__AUTOSCALING, newAutoscaling, newAutoscaling));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
     {
       case MultiClusterDslPackage.CLUSTER__DEPLOYMENT:
         return basicSetDeployment(null, msgs);
+      case MultiClusterDslPackage.CLUSTER__SERVICE:
+        return basicSetService(null, msgs);
       case MultiClusterDslPackage.CLUSTER__INGRESS:
         return basicSetIngress(null, msgs);
+      case MultiClusterDslPackage.CLUSTER__CONFIG_MAP:
+        return basicSetConfigMap(null, msgs);
+      case MultiClusterDslPackage.CLUSTER__AUTOSCALING:
+        return basicSetAutoscaling(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -252,8 +444,14 @@ public class ClusterImpl extends MinimalEObjectImpl.Container implements Cluster
         return getName();
       case MultiClusterDslPackage.CLUSTER__DEPLOYMENT:
         return getDeployment();
+      case MultiClusterDslPackage.CLUSTER__SERVICE:
+        return getService();
       case MultiClusterDslPackage.CLUSTER__INGRESS:
         return getIngress();
+      case MultiClusterDslPackage.CLUSTER__CONFIG_MAP:
+        return getConfigMap();
+      case MultiClusterDslPackage.CLUSTER__AUTOSCALING:
+        return getAutoscaling();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -274,8 +472,17 @@ public class ClusterImpl extends MinimalEObjectImpl.Container implements Cluster
       case MultiClusterDslPackage.CLUSTER__DEPLOYMENT:
         setDeployment((Deployment)newValue);
         return;
+      case MultiClusterDslPackage.CLUSTER__SERVICE:
+        setService((Service)newValue);
+        return;
       case MultiClusterDslPackage.CLUSTER__INGRESS:
         setIngress((Ingress)newValue);
+        return;
+      case MultiClusterDslPackage.CLUSTER__CONFIG_MAP:
+        setConfigMap((ConfigMap)newValue);
+        return;
+      case MultiClusterDslPackage.CLUSTER__AUTOSCALING:
+        setAutoscaling((AutoScaling)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -297,8 +504,17 @@ public class ClusterImpl extends MinimalEObjectImpl.Container implements Cluster
       case MultiClusterDslPackage.CLUSTER__DEPLOYMENT:
         setDeployment((Deployment)null);
         return;
+      case MultiClusterDslPackage.CLUSTER__SERVICE:
+        setService((Service)null);
+        return;
       case MultiClusterDslPackage.CLUSTER__INGRESS:
         setIngress((Ingress)null);
+        return;
+      case MultiClusterDslPackage.CLUSTER__CONFIG_MAP:
+        setConfigMap((ConfigMap)null);
+        return;
+      case MultiClusterDslPackage.CLUSTER__AUTOSCALING:
+        setAutoscaling((AutoScaling)null);
         return;
     }
     super.eUnset(featureID);
@@ -318,8 +534,14 @@ public class ClusterImpl extends MinimalEObjectImpl.Container implements Cluster
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case MultiClusterDslPackage.CLUSTER__DEPLOYMENT:
         return deployment != null;
+      case MultiClusterDslPackage.CLUSTER__SERVICE:
+        return service != null;
       case MultiClusterDslPackage.CLUSTER__INGRESS:
         return ingress != null;
+      case MultiClusterDslPackage.CLUSTER__CONFIG_MAP:
+        return configMap != null;
+      case MultiClusterDslPackage.CLUSTER__AUTOSCALING:
+        return autoscaling != null;
     }
     return super.eIsSet(featureID);
   }

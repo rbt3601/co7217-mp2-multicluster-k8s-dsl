@@ -31,23 +31,47 @@ public class MultiClusterDslParser extends AbstractContentAssistParser {
 		}
 		
 		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, MultiClusterDslGrammarAccess grammarAccess) {
+			builder.put(grammarAccess.getServiceTypeAccess().getAlternatives(), "rule__ServiceType__Alternatives");
 			builder.put(grammarAccess.getApplicationAccess().getGroup(), "rule__Application__Group__0");
+			builder.put(grammarAccess.getApplicationAccess().getGroup_3(), "rule__Application__Group_3__0");
 			builder.put(grammarAccess.getClusterAccess().getGroup(), "rule__Cluster__Group__0");
 			builder.put(grammarAccess.getDeploymentAccess().getGroup(), "rule__Deployment__Group__0");
 			builder.put(grammarAccess.getResourcesAccess().getGroup(), "rule__Resources__Group__0");
+			builder.put(grammarAccess.getHealthAccess().getGroup(), "rule__Health__Group__0");
+			builder.put(grammarAccess.getServiceAccess().getGroup(), "rule__Service__Group__0");
 			builder.put(grammarAccess.getIngressAccess().getGroup(), "rule__Ingress__Group__0");
+			builder.put(grammarAccess.getConfigMapAccess().getGroup(), "rule__ConfigMap__Group__0");
+			builder.put(grammarAccess.getConfigEntryAccess().getGroup(), "rule__ConfigEntry__Group__0");
+			builder.put(grammarAccess.getAutoScalingAccess().getGroup(), "rule__AutoScaling__Group__0");
 			builder.put(grammarAccess.getModelAccess().getApplicationAssignment(), "rule__Model__ApplicationAssignment");
 			builder.put(grammarAccess.getApplicationAccess().getNameAssignment_1(), "rule__Application__NameAssignment_1");
-			builder.put(grammarAccess.getApplicationAccess().getClustersAssignment_3(), "rule__Application__ClustersAssignment_3");
+			builder.put(grammarAccess.getApplicationAccess().getNamespaceAssignment_3_1(), "rule__Application__NamespaceAssignment_3_1");
+			builder.put(grammarAccess.getApplicationAccess().getClustersAssignment_4(), "rule__Application__ClustersAssignment_4");
 			builder.put(grammarAccess.getClusterAccess().getNameAssignment_1(), "rule__Cluster__NameAssignment_1");
 			builder.put(grammarAccess.getClusterAccess().getDeploymentAssignment_3(), "rule__Cluster__DeploymentAssignment_3");
-			builder.put(grammarAccess.getClusterAccess().getIngressAssignment_4(), "rule__Cluster__IngressAssignment_4");
+			builder.put(grammarAccess.getClusterAccess().getServiceAssignment_4(), "rule__Cluster__ServiceAssignment_4");
+			builder.put(grammarAccess.getClusterAccess().getIngressAssignment_5(), "rule__Cluster__IngressAssignment_5");
+			builder.put(grammarAccess.getClusterAccess().getConfigMapAssignment_6(), "rule__Cluster__ConfigMapAssignment_6");
+			builder.put(grammarAccess.getClusterAccess().getAutoscalingAssignment_7(), "rule__Cluster__AutoscalingAssignment_7");
 			builder.put(grammarAccess.getDeploymentAccess().getImageAssignment_3(), "rule__Deployment__ImageAssignment_3");
 			builder.put(grammarAccess.getDeploymentAccess().getReplicasAssignment_5(), "rule__Deployment__ReplicasAssignment_5");
 			builder.put(grammarAccess.getDeploymentAccess().getResourcesAssignment_6(), "rule__Deployment__ResourcesAssignment_6");
+			builder.put(grammarAccess.getDeploymentAccess().getHealthAssignment_7(), "rule__Deployment__HealthAssignment_7");
 			builder.put(grammarAccess.getResourcesAccess().getCpuAssignment_3(), "rule__Resources__CpuAssignment_3");
 			builder.put(grammarAccess.getResourcesAccess().getMemoryAssignment_5(), "rule__Resources__MemoryAssignment_5");
+			builder.put(grammarAccess.getHealthAccess().getReadinessPathAssignment_3(), "rule__Health__ReadinessPathAssignment_3");
+			builder.put(grammarAccess.getHealthAccess().getLivenessPathAssignment_5(), "rule__Health__LivenessPathAssignment_5");
+			builder.put(grammarAccess.getServiceAccess().getTypeAssignment_3(), "rule__Service__TypeAssignment_3");
+			builder.put(grammarAccess.getServiceAccess().getPortAssignment_5(), "rule__Service__PortAssignment_5");
+			builder.put(grammarAccess.getServiceAccess().getTargetPortAssignment_7(), "rule__Service__TargetPortAssignment_7");
 			builder.put(grammarAccess.getIngressAccess().getPathAssignment_3(), "rule__Ingress__PathAssignment_3");
+			builder.put(grammarAccess.getConfigMapAccess().getNameAssignment_1(), "rule__ConfigMap__NameAssignment_1");
+			builder.put(grammarAccess.getConfigMapAccess().getEntriesAssignment_3(), "rule__ConfigMap__EntriesAssignment_3");
+			builder.put(grammarAccess.getConfigEntryAccess().getKeyAssignment_0(), "rule__ConfigEntry__KeyAssignment_0");
+			builder.put(grammarAccess.getConfigEntryAccess().getValueAssignment_1(), "rule__ConfigEntry__ValueAssignment_1");
+			builder.put(grammarAccess.getAutoScalingAccess().getMinReplicasAssignment_3(), "rule__AutoScaling__MinReplicasAssignment_3");
+			builder.put(grammarAccess.getAutoScalingAccess().getMaxReplicasAssignment_5(), "rule__AutoScaling__MaxReplicasAssignment_5");
+			builder.put(grammarAccess.getAutoScalingAccess().getCpuUtilizationAssignment_7(), "rule__AutoScaling__CpuUtilizationAssignment_7");
 		}
 	}
 	

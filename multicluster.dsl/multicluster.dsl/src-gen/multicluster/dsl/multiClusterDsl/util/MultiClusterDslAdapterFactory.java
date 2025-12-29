@@ -101,9 +101,34 @@ public class MultiClusterDslAdapterFactory extends AdapterFactoryImpl
         return createResourcesAdapter();
       }
       @Override
+      public Adapter caseHealth(Health object)
+      {
+        return createHealthAdapter();
+      }
+      @Override
+      public Adapter caseService(Service object)
+      {
+        return createServiceAdapter();
+      }
+      @Override
       public Adapter caseIngress(Ingress object)
       {
         return createIngressAdapter();
+      }
+      @Override
+      public Adapter caseConfigMap(ConfigMap object)
+      {
+        return createConfigMapAdapter();
+      }
+      @Override
+      public Adapter caseConfigEntry(ConfigEntry object)
+      {
+        return createConfigEntryAdapter();
+      }
+      @Override
+      public Adapter caseAutoScaling(AutoScaling object)
+      {
+        return createAutoScalingAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -203,6 +228,36 @@ public class MultiClusterDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link multicluster.dsl.multiClusterDsl.Health <em>Health</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see multicluster.dsl.multiClusterDsl.Health
+   * @generated
+   */
+  public Adapter createHealthAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link multicluster.dsl.multiClusterDsl.Service <em>Service</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see multicluster.dsl.multiClusterDsl.Service
+   * @generated
+   */
+  public Adapter createServiceAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link multicluster.dsl.multiClusterDsl.Ingress <em>Ingress</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -213,6 +268,51 @@ public class MultiClusterDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createIngressAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link multicluster.dsl.multiClusterDsl.ConfigMap <em>Config Map</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see multicluster.dsl.multiClusterDsl.ConfigMap
+   * @generated
+   */
+  public Adapter createConfigMapAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link multicluster.dsl.multiClusterDsl.ConfigEntry <em>Config Entry</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see multicluster.dsl.multiClusterDsl.ConfigEntry
+   * @generated
+   */
+  public Adapter createConfigEntryAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link multicluster.dsl.multiClusterDsl.AutoScaling <em>Auto Scaling</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see multicluster.dsl.multiClusterDsl.AutoScaling
+   * @generated
+   */
+  public Adapter createAutoScalingAdapter()
   {
     return null;
   }

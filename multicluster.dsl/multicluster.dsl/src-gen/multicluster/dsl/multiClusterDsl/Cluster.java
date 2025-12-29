@@ -16,7 +16,10 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link multicluster.dsl.multiClusterDsl.Cluster#getName <em>Name</em>}</li>
  *   <li>{@link multicluster.dsl.multiClusterDsl.Cluster#getDeployment <em>Deployment</em>}</li>
+ *   <li>{@link multicluster.dsl.multiClusterDsl.Cluster#getService <em>Service</em>}</li>
  *   <li>{@link multicluster.dsl.multiClusterDsl.Cluster#getIngress <em>Ingress</em>}</li>
+ *   <li>{@link multicluster.dsl.multiClusterDsl.Cluster#getConfigMap <em>Config Map</em>}</li>
+ *   <li>{@link multicluster.dsl.multiClusterDsl.Cluster#getAutoscaling <em>Autoscaling</em>}</li>
  * </ul>
  *
  * @see multicluster.dsl.multiClusterDsl.MultiClusterDslPackage#getCluster()
@@ -70,6 +73,28 @@ public interface Cluster extends EObject
   void setDeployment(Deployment value);
 
   /**
+   * Returns the value of the '<em><b>Service</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Service</em>' containment reference.
+   * @see #setService(Service)
+   * @see multicluster.dsl.multiClusterDsl.MultiClusterDslPackage#getCluster_Service()
+   * @model containment="true"
+   * @generated
+   */
+  Service getService();
+
+  /**
+   * Sets the value of the '{@link multicluster.dsl.multiClusterDsl.Cluster#getService <em>Service</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Service</em>' containment reference.
+   * @see #getService()
+   * @generated
+   */
+  void setService(Service value);
+
+  /**
    * Returns the value of the '<em><b>Ingress</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -90,5 +115,49 @@ public interface Cluster extends EObject
    * @generated
    */
   void setIngress(Ingress value);
+
+  /**
+   * Returns the value of the '<em><b>Config Map</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Config Map</em>' containment reference.
+   * @see #setConfigMap(ConfigMap)
+   * @see multicluster.dsl.multiClusterDsl.MultiClusterDslPackage#getCluster_ConfigMap()
+   * @model containment="true"
+   * @generated
+   */
+  ConfigMap getConfigMap();
+
+  /**
+   * Sets the value of the '{@link multicluster.dsl.multiClusterDsl.Cluster#getConfigMap <em>Config Map</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Config Map</em>' containment reference.
+   * @see #getConfigMap()
+   * @generated
+   */
+  void setConfigMap(ConfigMap value);
+
+  /**
+   * Returns the value of the '<em><b>Autoscaling</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Autoscaling</em>' containment reference.
+   * @see #setAutoscaling(AutoScaling)
+   * @see multicluster.dsl.multiClusterDsl.MultiClusterDslPackage#getCluster_Autoscaling()
+   * @model containment="true"
+   * @generated
+   */
+  AutoScaling getAutoscaling();
+
+  /**
+   * Sets the value of the '{@link multicluster.dsl.multiClusterDsl.Cluster#getAutoscaling <em>Autoscaling</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Autoscaling</em>' containment reference.
+   * @see #getAutoscaling()
+   * @generated
+   */
+  void setAutoscaling(AutoScaling value);
 
 } // Cluster

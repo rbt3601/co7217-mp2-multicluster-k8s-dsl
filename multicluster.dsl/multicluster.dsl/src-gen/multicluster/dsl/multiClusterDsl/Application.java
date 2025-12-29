@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link multicluster.dsl.multiClusterDsl.Application#getName <em>Name</em>}</li>
+ *   <li>{@link multicluster.dsl.multiClusterDsl.Application#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link multicluster.dsl.multiClusterDsl.Application#getClusters <em>Clusters</em>}</li>
  * </ul>
  *
@@ -47,6 +48,28 @@ public interface Application extends EObject
    * @generated
    */
   void setName(String value);
+
+  /**
+   * Returns the value of the '<em><b>Namespace</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Namespace</em>' attribute.
+   * @see #setNamespace(String)
+   * @see multicluster.dsl.multiClusterDsl.MultiClusterDslPackage#getApplication_Namespace()
+   * @model
+   * @generated
+   */
+  String getNamespace();
+
+  /**
+   * Sets the value of the '{@link multicluster.dsl.multiClusterDsl.Application#getNamespace <em>Namespace</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Namespace</em>' attribute.
+   * @see #getNamespace()
+   * @generated
+   */
+  void setNamespace(String value);
 
   /**
    * Returns the value of the '<em><b>Clusters</b></em>' containment reference list.

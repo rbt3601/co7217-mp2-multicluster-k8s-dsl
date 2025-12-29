@@ -108,10 +108,45 @@ public class MultiClusterDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case MultiClusterDslPackage.HEALTH:
+      {
+        Health health = (Health)theEObject;
+        T result = caseHealth(health);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MultiClusterDslPackage.SERVICE:
+      {
+        Service service = (Service)theEObject;
+        T result = caseService(service);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case MultiClusterDslPackage.INGRESS:
       {
         Ingress ingress = (Ingress)theEObject;
         T result = caseIngress(ingress);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MultiClusterDslPackage.CONFIG_MAP:
+      {
+        ConfigMap configMap = (ConfigMap)theEObject;
+        T result = caseConfigMap(configMap);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MultiClusterDslPackage.CONFIG_ENTRY:
+      {
+        ConfigEntry configEntry = (ConfigEntry)theEObject;
+        T result = caseConfigEntry(configEntry);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MultiClusterDslPackage.AUTO_SCALING:
+      {
+        AutoScaling autoScaling = (AutoScaling)theEObject;
+        T result = caseAutoScaling(autoScaling);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -200,6 +235,38 @@ public class MultiClusterDslSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Health</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Health</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseHealth(Health object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Service</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Service</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseService(Service object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Ingress</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -211,6 +278,54 @@ public class MultiClusterDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseIngress(Ingress object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Config Map</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Config Map</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseConfigMap(ConfigMap object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Config Entry</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Config Entry</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseConfigEntry(ConfigEntry object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Auto Scaling</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Auto Scaling</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAutoScaling(AutoScaling object)
   {
     return null;
   }

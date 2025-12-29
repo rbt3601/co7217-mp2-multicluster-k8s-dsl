@@ -69,6 +69,24 @@ public interface MultiClusterDslFactory extends EFactory
   Resources createResources();
 
   /**
+   * Returns a new object of class '<em>Health</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Health</em>'.
+   * @generated
+   */
+  Health createHealth();
+
+  /**
+   * Returns a new object of class '<em>Service</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Service</em>'.
+   * @generated
+   */
+  Service createService();
+
+  /**
    * Returns a new object of class '<em>Ingress</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -76,6 +94,33 @@ public interface MultiClusterDslFactory extends EFactory
    * @generated
    */
   Ingress createIngress();
+
+  /**
+   * Returns a new object of class '<em>Config Map</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Config Map</em>'.
+   * @generated
+   */
+  ConfigMap createConfigMap();
+
+  /**
+   * Returns a new object of class '<em>Config Entry</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Config Entry</em>'.
+   * @generated
+   */
+  ConfigEntry createConfigEntry();
+
+  /**
+   * Returns a new object of class '<em>Auto Scaling</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Auto Scaling</em>'.
+   * @generated
+   */
+  AutoScaling createAutoScaling();
 
   /**
    * Returns the package supported by this factory.

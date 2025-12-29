@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * </p>
  * <ul>
  *   <li>{@link multicluster.dsl.multiClusterDsl.impl.ApplicationImpl#getName <em>Name</em>}</li>
+ *   <li>{@link multicluster.dsl.multiClusterDsl.impl.ApplicationImpl#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link multicluster.dsl.multiClusterDsl.impl.ApplicationImpl#getClusters <em>Clusters</em>}</li>
  * </ul>
  *
@@ -58,6 +59,26 @@ public class ApplicationImpl extends MinimalEObjectImpl.Container implements App
    * @ordered
    */
   protected String name = NAME_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getNamespace() <em>Namespace</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getNamespace()
+   * @generated
+   * @ordered
+   */
+  protected static final String NAMESPACE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getNamespace() <em>Namespace</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getNamespace()
+   * @generated
+   * @ordered
+   */
+  protected String namespace = NAMESPACE_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getClusters() <em>Clusters</em>}' containment reference list.
@@ -121,6 +142,31 @@ public class ApplicationImpl extends MinimalEObjectImpl.Container implements App
    * @generated
    */
   @Override
+  public String getNamespace()
+  {
+    return namespace;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setNamespace(String newNamespace)
+  {
+    String oldNamespace = namespace;
+    namespace = newNamespace;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MultiClusterDslPackage.APPLICATION__NAMESPACE, oldNamespace, namespace));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EList<Cluster> getClusters()
   {
     if (clusters == null)
@@ -158,6 +204,8 @@ public class ApplicationImpl extends MinimalEObjectImpl.Container implements App
     {
       case MultiClusterDslPackage.APPLICATION__NAME:
         return getName();
+      case MultiClusterDslPackage.APPLICATION__NAMESPACE:
+        return getNamespace();
       case MultiClusterDslPackage.APPLICATION__CLUSTERS:
         return getClusters();
     }
@@ -177,6 +225,9 @@ public class ApplicationImpl extends MinimalEObjectImpl.Container implements App
     {
       case MultiClusterDslPackage.APPLICATION__NAME:
         setName((String)newValue);
+        return;
+      case MultiClusterDslPackage.APPLICATION__NAMESPACE:
+        setNamespace((String)newValue);
         return;
       case MultiClusterDslPackage.APPLICATION__CLUSTERS:
         getClusters().clear();
@@ -199,6 +250,9 @@ public class ApplicationImpl extends MinimalEObjectImpl.Container implements App
       case MultiClusterDslPackage.APPLICATION__NAME:
         setName(NAME_EDEFAULT);
         return;
+      case MultiClusterDslPackage.APPLICATION__NAMESPACE:
+        setNamespace(NAMESPACE_EDEFAULT);
+        return;
       case MultiClusterDslPackage.APPLICATION__CLUSTERS:
         getClusters().clear();
         return;
@@ -218,6 +272,8 @@ public class ApplicationImpl extends MinimalEObjectImpl.Container implements App
     {
       case MultiClusterDslPackage.APPLICATION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case MultiClusterDslPackage.APPLICATION__NAMESPACE:
+        return NAMESPACE_EDEFAULT == null ? namespace != null : !NAMESPACE_EDEFAULT.equals(namespace);
       case MultiClusterDslPackage.APPLICATION__CLUSTERS:
         return clusters != null && !clusters.isEmpty();
     }
@@ -237,6 +293,8 @@ public class ApplicationImpl extends MinimalEObjectImpl.Container implements App
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
+    result.append(", namespace: ");
+    result.append(namespace);
     result.append(')');
     return result.toString();
   }

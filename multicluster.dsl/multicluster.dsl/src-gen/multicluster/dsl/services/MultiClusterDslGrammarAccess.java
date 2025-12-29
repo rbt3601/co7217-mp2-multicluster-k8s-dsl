@@ -6,7 +6,10 @@ package multicluster.dsl.services;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
+import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.EnumLiteralDeclaration;
+import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
@@ -26,13 +29,9 @@ public class MultiClusterDslGrammarAccess extends AbstractElementFinder.Abstract
 		private final Assignment cApplicationAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cApplicationApplicationParserRuleCall_0 = (RuleCall)cApplicationAssignment.eContents().get(0);
 		
-		////Model:
-		////    greetings+=Greeting*;
-		////
-		////Greeting:
-		////    'Hello' name=ID '!';
+		///* ================= Root ================= */
 		//Model:
-		//application=Application
+		//    application=Application
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -49,19 +48,26 @@ public class MultiClusterDslGrammarAccess extends AbstractElementFinder.Abstract
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cClustersAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cClustersClusterParserRuleCall_3_0 = (RuleCall)cClustersAssignment_3.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cNamespaceKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cNamespaceAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cNamespaceSTRINGTerminalRuleCall_3_1_0 = (RuleCall)cNamespaceAssignment_3_1.eContents().get(0);
+		private final Assignment cClustersAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cClustersClusterParserRuleCall_4_0 = (RuleCall)cClustersAssignment_4.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
+		///* ================= Application ================= */
 		//Application:
-		//'application' name=ID '{'
-		//clusters+=Cluster*
-		//'}'
+		//    'application' name=ID '{'
+		//        ('namespace' namespace=STRING)?
+		//        clusters+=Cluster*
+		//    '}'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'application' name=ID '{'
-		//clusters+=Cluster*
+		//    ('namespace' namespace=STRING)?
+		//    clusters+=Cluster*
 		//'}'
 		public Group getGroup() { return cGroup; }
 		
@@ -77,14 +83,26 @@ public class MultiClusterDslGrammarAccess extends AbstractElementFinder.Abstract
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 		
+		//('namespace' namespace=STRING)?
+		public Group getGroup_3() { return cGroup_3; }
+		
+		//'namespace'
+		public Keyword getNamespaceKeyword_3_0() { return cNamespaceKeyword_3_0; }
+		
+		//namespace=STRING
+		public Assignment getNamespaceAssignment_3_1() { return cNamespaceAssignment_3_1; }
+		
+		//STRING
+		public RuleCall getNamespaceSTRINGTerminalRuleCall_3_1_0() { return cNamespaceSTRINGTerminalRuleCall_3_1_0; }
+		
 		//clusters+=Cluster*
-		public Assignment getClustersAssignment_3() { return cClustersAssignment_3; }
+		public Assignment getClustersAssignment_4() { return cClustersAssignment_4; }
 		
 		//Cluster
-		public RuleCall getClustersClusterParserRuleCall_3_0() { return cClustersClusterParserRuleCall_3_0; }
+		public RuleCall getClustersClusterParserRuleCall_4_0() { return cClustersClusterParserRuleCall_4_0; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
+		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
 	public class ClusterElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "multicluster.dsl.MultiClusterDsl.Cluster");
@@ -95,21 +113,34 @@ public class MultiClusterDslGrammarAccess extends AbstractElementFinder.Abstract
 		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cDeploymentAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cDeploymentDeploymentParserRuleCall_3_0 = (RuleCall)cDeploymentAssignment_3.eContents().get(0);
-		private final Assignment cIngressAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cIngressIngressParserRuleCall_4_0 = (RuleCall)cIngressAssignment_4.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cServiceAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cServiceServiceParserRuleCall_4_0 = (RuleCall)cServiceAssignment_4.eContents().get(0);
+		private final Assignment cIngressAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cIngressIngressParserRuleCall_5_0 = (RuleCall)cIngressAssignment_5.eContents().get(0);
+		private final Assignment cConfigMapAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cConfigMapConfigMapParserRuleCall_6_0 = (RuleCall)cConfigMapAssignment_6.eContents().get(0);
+		private final Assignment cAutoscalingAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cAutoscalingAutoScalingParserRuleCall_7_0 = (RuleCall)cAutoscalingAssignment_7.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
+		///* ================= Cluster ================= */
 		//Cluster:
-		//'cluster' name=ID '{'
-		//deployment=Deployment
-		//ingress=Ingress?
-		//'}'
+		//    'cluster' name=ID '{'
+		//        deployment=Deployment
+		//        service=Service?
+		//        ingress=Ingress?
+		//        configMap=ConfigMap?
+		//        autoscaling=AutoScaling?
+		//    '}'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'cluster' name=ID '{'
-		//deployment=Deployment
-		//ingress=Ingress?
+		//    deployment=Deployment
+		//    service=Service?
+		//    ingress=Ingress?
+		//    configMap=ConfigMap?
+		//    autoscaling=AutoScaling?
 		//'}'
 		public Group getGroup() { return cGroup; }
 		
@@ -131,14 +162,32 @@ public class MultiClusterDslGrammarAccess extends AbstractElementFinder.Abstract
 		//Deployment
 		public RuleCall getDeploymentDeploymentParserRuleCall_3_0() { return cDeploymentDeploymentParserRuleCall_3_0; }
 		
+		//service=Service?
+		public Assignment getServiceAssignment_4() { return cServiceAssignment_4; }
+		
+		//Service
+		public RuleCall getServiceServiceParserRuleCall_4_0() { return cServiceServiceParserRuleCall_4_0; }
+		
 		//ingress=Ingress?
-		public Assignment getIngressAssignment_4() { return cIngressAssignment_4; }
+		public Assignment getIngressAssignment_5() { return cIngressAssignment_5; }
 		
 		//Ingress
-		public RuleCall getIngressIngressParserRuleCall_4_0() { return cIngressIngressParserRuleCall_4_0; }
+		public RuleCall getIngressIngressParserRuleCall_5_0() { return cIngressIngressParserRuleCall_5_0; }
+		
+		//configMap=ConfigMap?
+		public Assignment getConfigMapAssignment_6() { return cConfigMapAssignment_6; }
+		
+		//ConfigMap
+		public RuleCall getConfigMapConfigMapParserRuleCall_6_0() { return cConfigMapConfigMapParserRuleCall_6_0; }
+		
+		//autoscaling=AutoScaling?
+		public Assignment getAutoscalingAssignment_7() { return cAutoscalingAssignment_7; }
+		
+		//AutoScaling
+		public RuleCall getAutoscalingAutoScalingParserRuleCall_7_0() { return cAutoscalingAutoScalingParserRuleCall_7_0; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
+		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
 	}
 	public class DeploymentElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "multicluster.dsl.MultiClusterDsl.Deployment");
@@ -153,21 +202,26 @@ public class MultiClusterDslGrammarAccess extends AbstractElementFinder.Abstract
 		private final RuleCall cReplicasINTTerminalRuleCall_5_0 = (RuleCall)cReplicasAssignment_5.eContents().get(0);
 		private final Assignment cResourcesAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final RuleCall cResourcesResourcesParserRuleCall_6_0 = (RuleCall)cResourcesAssignment_6.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Assignment cHealthAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cHealthHealthParserRuleCall_7_0 = (RuleCall)cHealthAssignment_7.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
+		///* ================= Deployment ================= */
 		//Deployment:
-		//'deployment' '{'
-		//'image' image=STRING
-		//'replicas' replicas=INT
-		//resources=Resources
-		//'}'
+		//    'deployment' '{'
+		//        'image' image=STRING
+		//        'replicas' replicas=INT
+		//        resources=Resources
+		//        health=Health?
+		//    '}'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'deployment' '{'
-		//'image' image=STRING
-		//'replicas' replicas=INT
-		//resources=Resources
+		//    'image' image=STRING
+		//    'replicas' replicas=INT
+		//    resources=Resources
+		//    health=Health?
 		//'}'
 		public Group getGroup() { return cGroup; }
 		
@@ -201,8 +255,14 @@ public class MultiClusterDslGrammarAccess extends AbstractElementFinder.Abstract
 		//Resources
 		public RuleCall getResourcesResourcesParserRuleCall_6_0() { return cResourcesResourcesParserRuleCall_6_0; }
 		
+		//health=Health?
+		public Assignment getHealthAssignment_7() { return cHealthAssignment_7; }
+		
+		//Health
+		public RuleCall getHealthHealthParserRuleCall_7_0() { return cHealthHealthParserRuleCall_7_0; }
+		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
+		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
 	}
 	public class ResourcesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "multicluster.dsl.MultiClusterDsl.Resources");
@@ -217,17 +277,18 @@ public class MultiClusterDslGrammarAccess extends AbstractElementFinder.Abstract
 		private final RuleCall cMemorySTRINGTerminalRuleCall_5_0 = (RuleCall)cMemoryAssignment_5.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
+		///* ================= Resources ================= */
 		//Resources:
-		//'resources' '{'
-		//'cpu' cpu=STRING
-		//'memory' memory=STRING
-		//'}'
+		//    'resources' '{'
+		//        'cpu' cpu=STRING
+		//        'memory' memory=STRING
+		//    '}'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'resources' '{'
-		//'cpu' cpu=STRING
-		//'memory' memory=STRING
+		//    'cpu' cpu=STRING
+		//    'memory' memory=STRING
 		//'}'
 		public Group getGroup() { return cGroup; }
 		
@@ -258,6 +319,130 @@ public class MultiClusterDslGrammarAccess extends AbstractElementFinder.Abstract
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
+	public class HealthElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "multicluster.dsl.MultiClusterDsl.Health");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cHealthKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cReadinessPathKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cReadinessPathAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cReadinessPathSTRINGTerminalRuleCall_3_0 = (RuleCall)cReadinessPathAssignment_3.eContents().get(0);
+		private final Keyword cLivenessPathKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cLivenessPathAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cLivenessPathSTRINGTerminalRuleCall_5_0 = (RuleCall)cLivenessPathAssignment_5.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		
+		///* ================= Health Probes ================= */
+		//Health:
+		//    'health' '{'
+		//        'readinessPath' readinessPath=STRING
+		//        'livenessPath' livenessPath=STRING
+		//    '}'
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'health' '{'
+		//    'readinessPath' readinessPath=STRING
+		//    'livenessPath' livenessPath=STRING
+		//'}'
+		public Group getGroup() { return cGroup; }
+		
+		//'health'
+		public Keyword getHealthKeyword_0() { return cHealthKeyword_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
+		
+		//'readinessPath'
+		public Keyword getReadinessPathKeyword_2() { return cReadinessPathKeyword_2; }
+		
+		//readinessPath=STRING
+		public Assignment getReadinessPathAssignment_3() { return cReadinessPathAssignment_3; }
+		
+		//STRING
+		public RuleCall getReadinessPathSTRINGTerminalRuleCall_3_0() { return cReadinessPathSTRINGTerminalRuleCall_3_0; }
+		
+		//'livenessPath'
+		public Keyword getLivenessPathKeyword_4() { return cLivenessPathKeyword_4; }
+		
+		//livenessPath=STRING
+		public Assignment getLivenessPathAssignment_5() { return cLivenessPathAssignment_5; }
+		
+		//STRING
+		public RuleCall getLivenessPathSTRINGTerminalRuleCall_5_0() { return cLivenessPathSTRINGTerminalRuleCall_5_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
+	}
+	public class ServiceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "multicluster.dsl.MultiClusterDsl.Service");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cServiceKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cTypeKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cTypeAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cTypeServiceTypeEnumRuleCall_3_0 = (RuleCall)cTypeAssignment_3.eContents().get(0);
+		private final Keyword cPortKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cPortAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cPortINTTerminalRuleCall_5_0 = (RuleCall)cPortAssignment_5.eContents().get(0);
+		private final Keyword cTargetPortKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cTargetPortAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cTargetPortINTTerminalRuleCall_7_0 = (RuleCall)cTargetPortAssignment_7.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		
+		///* ================= Service ================= */
+		//Service:
+		//    'service' '{'
+		//        'type' type=ServiceType
+		//        'port' port=INT
+		//        'targetPort' targetPort=INT
+		//    '}'
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'service' '{'
+		//    'type' type=ServiceType
+		//    'port' port=INT
+		//    'targetPort' targetPort=INT
+		//'}'
+		public Group getGroup() { return cGroup; }
+		
+		//'service'
+		public Keyword getServiceKeyword_0() { return cServiceKeyword_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
+		
+		//'type'
+		public Keyword getTypeKeyword_2() { return cTypeKeyword_2; }
+		
+		//type=ServiceType
+		public Assignment getTypeAssignment_3() { return cTypeAssignment_3; }
+		
+		//ServiceType
+		public RuleCall getTypeServiceTypeEnumRuleCall_3_0() { return cTypeServiceTypeEnumRuleCall_3_0; }
+		
+		//'port'
+		public Keyword getPortKeyword_4() { return cPortKeyword_4; }
+		
+		//port=INT
+		public Assignment getPortAssignment_5() { return cPortAssignment_5; }
+		
+		//INT
+		public RuleCall getPortINTTerminalRuleCall_5_0() { return cPortINTTerminalRuleCall_5_0; }
+		
+		//'targetPort'
+		public Keyword getTargetPortKeyword_6() { return cTargetPortKeyword_6; }
+		
+		//targetPort=INT
+		public Assignment getTargetPortAssignment_7() { return cTargetPortAssignment_7; }
+		
+		//INT
+		public RuleCall getTargetPortINTTerminalRuleCall_7_0() { return cTargetPortINTTerminalRuleCall_7_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
+	}
 	public class IngressElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "multicluster.dsl.MultiClusterDsl.Ingress");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -268,15 +453,16 @@ public class MultiClusterDslGrammarAccess extends AbstractElementFinder.Abstract
 		private final RuleCall cPathSTRINGTerminalRuleCall_3_0 = (RuleCall)cPathAssignment_3.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
+		///* ================= Ingress ================= */
 		//Ingress:
-		//'ingress' '{'
-		//'path' path=STRING
-		//'}'
+		//    'ingress' '{'
+		//        'path' path=STRING
+		//    '}'
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'ingress' '{'
-		//'path' path=STRING
+		//    'path' path=STRING
 		//'}'
 		public Group getGroup() { return cGroup; }
 		
@@ -298,14 +484,196 @@ public class MultiClusterDslGrammarAccess extends AbstractElementFinder.Abstract
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
+	public class ConfigMapElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "multicluster.dsl.MultiClusterDsl.ConfigMap");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cConfigMapKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cEntriesAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cEntriesConfigEntryParserRuleCall_3_0 = (RuleCall)cEntriesAssignment_3.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		
+		///* ================= ConfigMap ================= */
+		//ConfigMap:
+		//    'configMap' name=ID '{'
+		//        entries+=ConfigEntry+
+		//    '}'
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'configMap' name=ID '{'
+		//    entries+=ConfigEntry+
+		//'}'
+		public Group getGroup() { return cGroup; }
+		
+		//'configMap'
+		public Keyword getConfigMapKeyword_0() { return cConfigMapKeyword_0; }
+		
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		
+		//entries+=ConfigEntry+
+		public Assignment getEntriesAssignment_3() { return cEntriesAssignment_3; }
+		
+		//ConfigEntry
+		public RuleCall getEntriesConfigEntryParserRuleCall_3_0() { return cEntriesConfigEntryParserRuleCall_3_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
+	}
+	public class ConfigEntryElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "multicluster.dsl.MultiClusterDsl.ConfigEntry");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cKeyAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cKeyIDTerminalRuleCall_0_0 = (RuleCall)cKeyAssignment_0.eContents().get(0);
+		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cValueSTRINGTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
+		
+		//ConfigEntry:
+		//    key=ID value=STRING
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//key=ID value=STRING
+		public Group getGroup() { return cGroup; }
+		
+		//key=ID
+		public Assignment getKeyAssignment_0() { return cKeyAssignment_0; }
+		
+		//ID
+		public RuleCall getKeyIDTerminalRuleCall_0_0() { return cKeyIDTerminalRuleCall_0_0; }
+		
+		//value=STRING
+		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
+		
+		//STRING
+		public RuleCall getValueSTRINGTerminalRuleCall_1_0() { return cValueSTRINGTerminalRuleCall_1_0; }
+	}
+	public class AutoScalingElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "multicluster.dsl.MultiClusterDsl.AutoScaling");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cAutoscalingKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cMinReplicasKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cMinReplicasAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cMinReplicasINTTerminalRuleCall_3_0 = (RuleCall)cMinReplicasAssignment_3.eContents().get(0);
+		private final Keyword cMaxReplicasKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cMaxReplicasAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cMaxReplicasINTTerminalRuleCall_5_0 = (RuleCall)cMaxReplicasAssignment_5.eContents().get(0);
+		private final Keyword cCpuUtilizationKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cCpuUtilizationAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cCpuUtilizationINTTerminalRuleCall_7_0 = (RuleCall)cCpuUtilizationAssignment_7.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		
+		///* ================= Autoscaling ================= */
+		//AutoScaling:
+		//    'autoscaling' '{'
+		//        'minReplicas' minReplicas=INT
+		//        'maxReplicas' maxReplicas=INT
+		//        'cpuUtilization' cpuUtilization=INT
+		//    '}'
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'autoscaling' '{'
+		//    'minReplicas' minReplicas=INT
+		//    'maxReplicas' maxReplicas=INT
+		//    'cpuUtilization' cpuUtilization=INT
+		//'}'
+		public Group getGroup() { return cGroup; }
+		
+		//'autoscaling'
+		public Keyword getAutoscalingKeyword_0() { return cAutoscalingKeyword_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
+		
+		//'minReplicas'
+		public Keyword getMinReplicasKeyword_2() { return cMinReplicasKeyword_2; }
+		
+		//minReplicas=INT
+		public Assignment getMinReplicasAssignment_3() { return cMinReplicasAssignment_3; }
+		
+		//INT
+		public RuleCall getMinReplicasINTTerminalRuleCall_3_0() { return cMinReplicasINTTerminalRuleCall_3_0; }
+		
+		//'maxReplicas'
+		public Keyword getMaxReplicasKeyword_4() { return cMaxReplicasKeyword_4; }
+		
+		//maxReplicas=INT
+		public Assignment getMaxReplicasAssignment_5() { return cMaxReplicasAssignment_5; }
+		
+		//INT
+		public RuleCall getMaxReplicasINTTerminalRuleCall_5_0() { return cMaxReplicasINTTerminalRuleCall_5_0; }
+		
+		//'cpuUtilization'
+		public Keyword getCpuUtilizationKeyword_6() { return cCpuUtilizationKeyword_6; }
+		
+		//cpuUtilization=INT
+		public Assignment getCpuUtilizationAssignment_7() { return cCpuUtilizationAssignment_7; }
+		
+		//INT
+		public RuleCall getCpuUtilizationINTTerminalRuleCall_7_0() { return cCpuUtilizationINTTerminalRuleCall_7_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
+	}
 	
+	public class ServiceTypeElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "multicluster.dsl.MultiClusterDsl.ServiceType");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cClusterIPEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cClusterIPClusterIPKeyword_0_0 = (Keyword)cClusterIPEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cNodePortEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cNodePortNodePortKeyword_1_0 = (Keyword)cNodePortEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cLoadBalancerEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cLoadBalancerLoadBalancerKeyword_2_0 = (Keyword)cLoadBalancerEnumLiteralDeclaration_2.eContents().get(0);
+		
+		///* ================= Enums ================= */
+		//enum ServiceType:
+		//    ClusterIP | NodePort | LoadBalancer
+		//;
+		public EnumRule getRule() { return rule; }
+		
+		//ClusterIP | NodePort | LoadBalancer
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//ClusterIP
+		public EnumLiteralDeclaration getClusterIPEnumLiteralDeclaration_0() { return cClusterIPEnumLiteralDeclaration_0; }
+		
+		public Keyword getClusterIPClusterIPKeyword_0_0() { return cClusterIPClusterIPKeyword_0_0; }
+		
+		//NodePort
+		public EnumLiteralDeclaration getNodePortEnumLiteralDeclaration_1() { return cNodePortEnumLiteralDeclaration_1; }
+		
+		public Keyword getNodePortNodePortKeyword_1_0() { return cNodePortNodePortKeyword_1_0; }
+		
+		//LoadBalancer
+		public EnumLiteralDeclaration getLoadBalancerEnumLiteralDeclaration_2() { return cLoadBalancerEnumLiteralDeclaration_2; }
+		
+		public Keyword getLoadBalancerLoadBalancerKeyword_2_0() { return cLoadBalancerLoadBalancerKeyword_2_0; }
+	}
 	
 	private final ModelElements pModel;
 	private final ApplicationElements pApplication;
 	private final ClusterElements pCluster;
 	private final DeploymentElements pDeployment;
 	private final ResourcesElements pResources;
+	private final HealthElements pHealth;
+	private final ServiceElements pService;
 	private final IngressElements pIngress;
+	private final ConfigMapElements pConfigMap;
+	private final ConfigEntryElements pConfigEntry;
+	private final AutoScalingElements pAutoScaling;
+	private final ServiceTypeElements eServiceType;
 	
 	private final Grammar grammar;
 	
@@ -321,7 +689,13 @@ public class MultiClusterDslGrammarAccess extends AbstractElementFinder.Abstract
 		this.pCluster = new ClusterElements();
 		this.pDeployment = new DeploymentElements();
 		this.pResources = new ResourcesElements();
+		this.pHealth = new HealthElements();
+		this.pService = new ServiceElements();
 		this.pIngress = new IngressElements();
+		this.pConfigMap = new ConfigMapElements();
+		this.pConfigEntry = new ConfigEntryElements();
+		this.pAutoScaling = new AutoScalingElements();
+		this.eServiceType = new ServiceTypeElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -351,13 +725,9 @@ public class MultiClusterDslGrammarAccess extends AbstractElementFinder.Abstract
 	}
 
 	
-	////Model:
-	////    greetings+=Greeting*;
-	////
-	////Greeting:
-	////    'Hello' name=ID '!';
+	///* ================= Root ================= */
 	//Model:
-	//application=Application
+	//    application=Application
 	//;
 	public ModelElements getModelAccess() {
 		return pModel;
@@ -367,10 +737,12 @@ public class MultiClusterDslGrammarAccess extends AbstractElementFinder.Abstract
 		return getModelAccess().getRule();
 	}
 	
+	///* ================= Application ================= */
 	//Application:
-	//'application' name=ID '{'
-	//clusters+=Cluster*
-	//'}'
+	//    'application' name=ID '{'
+	//        ('namespace' namespace=STRING)?
+	//        clusters+=Cluster*
+	//    '}'
 	//;
 	public ApplicationElements getApplicationAccess() {
 		return pApplication;
@@ -380,11 +752,15 @@ public class MultiClusterDslGrammarAccess extends AbstractElementFinder.Abstract
 		return getApplicationAccess().getRule();
 	}
 	
+	///* ================= Cluster ================= */
 	//Cluster:
-	//'cluster' name=ID '{'
-	//deployment=Deployment
-	//ingress=Ingress?
-	//'}'
+	//    'cluster' name=ID '{'
+	//        deployment=Deployment
+	//        service=Service?
+	//        ingress=Ingress?
+	//        configMap=ConfigMap?
+	//        autoscaling=AutoScaling?
+	//    '}'
 	//;
 	public ClusterElements getClusterAccess() {
 		return pCluster;
@@ -394,12 +770,14 @@ public class MultiClusterDslGrammarAccess extends AbstractElementFinder.Abstract
 		return getClusterAccess().getRule();
 	}
 	
+	///* ================= Deployment ================= */
 	//Deployment:
-	//'deployment' '{'
-	//'image' image=STRING
-	//'replicas' replicas=INT
-	//resources=Resources
-	//'}'
+	//    'deployment' '{'
+	//        'image' image=STRING
+	//        'replicas' replicas=INT
+	//        resources=Resources
+	//        health=Health?
+	//    '}'
 	//;
 	public DeploymentElements getDeploymentAccess() {
 		return pDeployment;
@@ -409,11 +787,12 @@ public class MultiClusterDslGrammarAccess extends AbstractElementFinder.Abstract
 		return getDeploymentAccess().getRule();
 	}
 	
+	///* ================= Resources ================= */
 	//Resources:
-	//'resources' '{'
-	//'cpu' cpu=STRING
-	//'memory' memory=STRING
-	//'}'
+	//    'resources' '{'
+	//        'cpu' cpu=STRING
+	//        'memory' memory=STRING
+	//    '}'
 	//;
 	public ResourcesElements getResourcesAccess() {
 		return pResources;
@@ -423,10 +802,42 @@ public class MultiClusterDslGrammarAccess extends AbstractElementFinder.Abstract
 		return getResourcesAccess().getRule();
 	}
 	
+	///* ================= Health Probes ================= */
+	//Health:
+	//    'health' '{'
+	//        'readinessPath' readinessPath=STRING
+	//        'livenessPath' livenessPath=STRING
+	//    '}'
+	//;
+	public HealthElements getHealthAccess() {
+		return pHealth;
+	}
+	
+	public ParserRule getHealthRule() {
+		return getHealthAccess().getRule();
+	}
+	
+	///* ================= Service ================= */
+	//Service:
+	//    'service' '{'
+	//        'type' type=ServiceType
+	//        'port' port=INT
+	//        'targetPort' targetPort=INT
+	//    '}'
+	//;
+	public ServiceElements getServiceAccess() {
+		return pService;
+	}
+	
+	public ParserRule getServiceRule() {
+		return getServiceAccess().getRule();
+	}
+	
+	///* ================= Ingress ================= */
 	//Ingress:
-	//'ingress' '{'
-	//'path' path=STRING
-	//'}'
+	//    'ingress' '{'
+	//        'path' path=STRING
+	//    '}'
 	//;
 	public IngressElements getIngressAccess() {
 		return pIngress;
@@ -434,6 +845,59 @@ public class MultiClusterDslGrammarAccess extends AbstractElementFinder.Abstract
 	
 	public ParserRule getIngressRule() {
 		return getIngressAccess().getRule();
+	}
+	
+	///* ================= ConfigMap ================= */
+	//ConfigMap:
+	//    'configMap' name=ID '{'
+	//        entries+=ConfigEntry+
+	//    '}'
+	//;
+	public ConfigMapElements getConfigMapAccess() {
+		return pConfigMap;
+	}
+	
+	public ParserRule getConfigMapRule() {
+		return getConfigMapAccess().getRule();
+	}
+	
+	//ConfigEntry:
+	//    key=ID value=STRING
+	//;
+	public ConfigEntryElements getConfigEntryAccess() {
+		return pConfigEntry;
+	}
+	
+	public ParserRule getConfigEntryRule() {
+		return getConfigEntryAccess().getRule();
+	}
+	
+	///* ================= Autoscaling ================= */
+	//AutoScaling:
+	//    'autoscaling' '{'
+	//        'minReplicas' minReplicas=INT
+	//        'maxReplicas' maxReplicas=INT
+	//        'cpuUtilization' cpuUtilization=INT
+	//    '}'
+	//;
+	public AutoScalingElements getAutoScalingAccess() {
+		return pAutoScaling;
+	}
+	
+	public ParserRule getAutoScalingRule() {
+		return getAutoScalingAccess().getRule();
+	}
+	
+	///* ================= Enums ================= */
+	//enum ServiceType:
+	//    ClusterIP | NodePort | LoadBalancer
+	//;
+	public ServiceTypeElements getServiceTypeAccess() {
+		return eServiceType;
+	}
+	
+	public EnumRule getServiceTypeRule() {
+		return getServiceTypeAccess().getRule();
 	}
 	
 	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
