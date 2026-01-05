@@ -1,0 +1,53 @@
+application backendapi {
+  namespace "prod"
+
+  cluster dev {
+    deployment {
+      image "backend:latest"
+      replicas 1
+      resources {
+        cpu "250m"
+        memory "256Mi"
+      }
+    }
+  }
+
+  cluster staging {
+    deployment {
+      image "backend:latest"
+      replicas 2
+      resources {
+        cpu "500m"
+        memory "512Mi"
+      }
+    }
+  }
+
+  cluster production {
+    deployment {
+      image "backend:latest"
+      replicas 5
+      resources {
+        cpu "1000m"
+        memory "1Gi"
+      }
+      health {
+        readinessPath "/ready"
+        livenessPath "/health"
+      }
+    }
+    service {
+      type LoadBalancer
+      port 80
+      targetPort 8080
+    }
+    ingress {
+      path "/api"
+    }
+    autoscaling {
+      minReplicas 3
+      maxReplicas 6
+      cpuUtilization 70
+    }
+  }
+}
