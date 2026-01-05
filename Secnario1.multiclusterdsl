@@ -1,9 +1,11 @@
 application webapp {
   namespace "production"
+
+  /* EU Region */
   cluster eu {
     deployment {
       image "nginx:latest"
-      replicas 
+      replicas 2
       resources {
         cpu "500m"
         memory "256Mi"
@@ -13,25 +15,30 @@ application webapp {
         livenessPath "/health"
       }
     }
+
     service {
       type LoadBalancer
       port 80
       targetPort 8080
     }
+
     ingress {
       path "/"
     }
+
     configMap app_config {
       ENV "production"
       REGION "eu"
     }
+
     autoscaling {
       minReplicas 2
       maxReplicas 5
       cpuUtilization 70
     }
   }
-  
+
+  /* US Region */
   cluster us {
     deployment {
       image "nginx:latest"
@@ -41,6 +48,7 @@ application webapp {
         memory "128Mi"
       }
     }
+
     service {
       type ClusterIP
       port 80
