@@ -1,0 +1,65 @@
+apiVersion: apps/v1 
+
+kind: Deployment 
+
+metadata: 
+
+  name: webapp-eu 
+
+namespace: production 
+
+spec: 
+
+  replicas: 2 
+
+  selector: 
+
+    matchLabels: 
+
+      app: webapp 
+
+  template: 
+
+    metadata: 
+
+      labels: 
+
+        app: webapp 
+
+    spec: 
+
+      containers: 
+
+      - name: webapp 
+
+        image: nginx:latest 
+
+        resources: 
+
+          limits: 
+
+            cpu: 500m 
+
+            memory: 256Mi 
+
+readinessProbe: 
+
+  httpGet: 
+
+    path: /health 
+
+    port: 
+
+    number: 80 
+
+  
+
+livenessProbe: 
+
+  httpGet: 
+
+    path: /health 
+
+    port: 
+
+    number: 80 

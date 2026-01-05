@@ -1,0 +1,311 @@
+//Namespace 
+
+apiVersion: v1 
+
+kind: Namespace 
+
+metadata: 
+
+  name: production 
+
+//EU ConfigMap 
+
+apiVersion: v1 
+
+kind: ConfigMap 
+
+metadata: 
+
+  name: eu-app-config 
+
+  namespace: production 
+
+data: 
+
+  ENV: "production" 
+
+  REGION: "eu" 
+
+ 
+
+//EU Deployment 
+
+apiVersion: apps/v1 
+
+kind: Deployment 
+
+metadata: 
+
+  name: webapp-eu 
+
+  namespace: production 
+
+spec: 
+
+  replicas: 2 
+
+  selector: 
+
+    matchLabels: 
+
+      app: webapp 
+
+      region: eu 
+
+  template: 
+
+    metadata: 
+
+      labels: 
+
+        app: webapp 
+
+        region: eu 
+
+    spec: 
+
+      containers: 
+
+        - name: nginx 
+
+          image: nginx:latest 
+
+          ports: 
+
+            - containerPort: 8080 
+
+          resources: 
+
+            requests: 
+
+              cpu: "500m" 
+
+              memory: "256Mi" 
+
+            limits: 
+
+              cpu: "500m" 
+
+              memory: "256Mi" 
+
+          readinessProbe: 
+
+            httpGet: 
+
+              path: /health 
+
+              port: 8080 
+
+          livenessProbe: 
+
+            httpGet: 
+
+              path: /health 
+
+              port: 8080 
+
+          envFrom: 
+
+            - configMapRef: 
+
+                name: eu-app-config 
+
+ 
+
+//EU Service 
+
+apiVersion: v1 
+
+kind: Service 
+
+metadata: 
+
+  name: webapp-eu-service 
+
+  namespace: production 
+
+spec: 
+
+  type: LoadBalancer 
+
+  selector: 
+
+    app: webapp 
+
+    region: eu 
+
+  ports: 
+
+    - port: 80 
+
+      targetPort: 8080 
+
+ 
+
+//EU Ingress 
+
+apiVersion: networking.k8s.io/v1 
+
+kind: Ingress 
+
+metadata: 
+
+  name: webapp-eu-ingress 
+
+  namespace: production 
+
+spec: 
+
+  rules: 
+
+    - http: 
+
+        paths: 
+
+          - path: / 
+
+            pathType: Prefix 
+
+            backend: 
+
+              service: 
+
+                name: webapp-eu-service 
+
+                port: 
+
+                  number: 80 
+
+ 
+
+//EU Horizontal Pod Autoscaler 
+
+apiVersion: autoscaling/v2 
+
+kind: HorizontalPodAutoscaler 
+
+metadata: 
+
+  name: webapp-eu-hpa 
+
+  namespace: production 
+
+spec: 
+
+  scaleTargetRef: 
+
+    apiVersion: apps/v1 
+
+    kind: Deployment 
+
+    name: webapp-eu 
+
+  minReplicas: 2 
+
+  maxReplicas: 5 
+
+  metrics: 
+
+    - type: Resource 
+
+      resource: 
+
+        name: cpu 
+
+        target: 
+
+          type: Utilization 
+
+          averageUtilization: 70 
+
+ 
+
+//US Deployment 
+
+apiVersion: apps/v1 
+
+kind: Deployment 
+
+metadata: 
+
+  name: webapp-us 
+
+  namespace: production 
+
+spec: 
+
+  replicas: 1 
+
+  selector: 
+
+    matchLabels: 
+
+      app: webapp 
+
+      region: us 
+
+  template: 
+
+    metadata: 
+
+      labels: 
+
+        app: webapp 
+
+        region: us 
+
+    spec: 
+
+      containers: 
+
+        - name: nginx 
+
+          image: nginx:latest 
+
+          ports: 
+
+            - containerPort: 80 
+
+          resources: 
+
+            requests: 
+
+              cpu: "250m" 
+
+              memory: "128Mi" 
+
+            limits: 
+
+              cpu: "250m" 
+
+              memory: "128Mi" 
+
+ 
+
+//US Service 
+
+apiVersion: v1 
+
+kind: Service 
+
+metadata: 
+
+  name: webapp-us-service 
+
+  namespace: production 
+
+spec: 
+
+  type: ClusterIP 
+
+  selector: 
+
+    app: webapp 
+
+    region: us 
+
+  ports: 
+
+    - port: 80 
+
+      targetPort: 80 
